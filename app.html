@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nabitende S.S. — Operations</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            blue: '#0369a1',
+            blueLight: '#0ea5e9',
+            blueDark: '#075985',
+            cream: '#FBF6EC',
+            creamDeep: '#EAD9B7'
+          }
+        }
+      }
+    }
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-brand-cream text-gray-900 min-h-screen">
+
+<!-- ============ CONFIG — fill these in with your Supabase project values ============ -->
+<script>
+  const SUPABASE_URL = 'sb_secret_WyEdwLdXgpu68_uHa01ajQ_h4kOqQy_';
+  const SUPABASE_ANON_KEY = 'sb_publishable_udd8b054apFHUCXkZVTjvA_m7JYvEb4';
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+</script>
+
+<div id="app" class="max-w-6xl mx-auto p-4"></div>
+
+<script>
+let currentUser = null;
+let currentProfile = null;
+let classesCache = [];
+let streamsCache = [];
+
+const app = document.getElementById('app');
+
+// ---------------- BOOT ----------------
+async function boot() {
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (session) {
+    currentUser = session.user;
+    await loadProfile();
+  } else {
+    renderLogin();
+  }
+}
+
+async function loadProfile() {
+  const { data, error } = await supabaseClient
+    .from('profiles')
+    .select('*')
+    .eq('id', currentUser.id)
+    .single();
+  if (error || !data) {
+    renderNeedsProfile();
+    return;
+  }
+  currentProfile = data;
+  await Promise.all([loadClasses(), loadStreams()]);
+  renderShell('dashboard');
+}
+
+async function loadClasses() {
+  const { data } = await supabaseClient.from('classes').select('*').order('order_index');
+  classesCache = data || [];
+}
+
+async function loadStreams() {
+  const { data } = await supabaseClient.from('streams').select('*, classes(name, order_index)').order('name');
+  streamsCache = data || [];
+}
+
+// ---------------- LOGIN ----------------
+function renderLogin() {
+  app.innerHTML = `
+    <div class="min-h-screen flex items-center justify-center">
+      <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm border border-brand-creamDeep">
+        <h1 class="text-xl font-bold text-brand-blueDark mb-1">Nabitende S.S.</h1>
+        <p class="text-sm text-gray-500 mb-6">Staff sign in</p>
+        <form id="loginForm" class="space-y-4">
+          <input type="email" id="email" placeholder="Email" required
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-blue">
+          <input type="password" id="password" placeholder="Password" required
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-blue">
+          <button type="submit"
+            class="w-full bg-brand-blue hover:bg-brand-blueDark text-white font-semibold py-2 rounded-lg transition">
+            Sign In
+          </button>
+          <p id="loginError" class="text-red-600 text-sm hidden"></p>
+        </form>
+      </div>
+    </div>`;
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if (error) {
+      const err = document.getElementById('loginError');
+      err.textContent = error.message;
+      err.classList.remove('hidden');
+      return;
+    }
+    currentUser = data.user;
+    await loadProfile();
+  });
+}
+
+function renderNeedsProfile() {
+  app.innerHTML = `
+    <div class="min-h-screen flex items-center justify-center text-center">
+      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md border border-brand-creamDeep">
+        <h1 class="text-lg font-bold text-brand-blueDark mb-2">Account not set up yet</h1>
+        <p class="text-gray-600 text-sm">You're signed in, but there's no staff profile linked to your account yet.
+        Ask your admin to add a row for you in the <code>profiles</code> table with your user id and role.</p>
+        <button onclick="signOut()" class="mt-4 text-brand-blue underline text-sm">Sign out</button>
+      </div>
+    </div>`;
+}
+
+async function signOut() {
+  await supabaseClient.auth.signOut();
+  currentUser = null;
+  currentProfile = null;
+  renderLogin();
+}
+
+// ---------------- SHELL ----------------
+function renderShell(activeView) {
+  const isAdmin = currentProfile.role === 'admin';
+  app.innerHTML = `
+    <header class="flex items-center justify-between py-4 mb-6 border-b border-brand-creamDeep">
+      <div>
+        <h1 class="text-lg font-bold text-brand-blueDark">Nabitende S.S. — Operations</h1>
+        <p class="text-xs text-gray-500">${currentProfile.full_name} · ${currentProfile.role}</p>
+      </div>
+      <button onclick="signOut()" class="text-sm text-brand-blue underline">Sign out</button>
+    </header>
+    <nav class="flex gap-2 mb-6 flex-wrap">
+      ${navButton('dashboard', 'Dashboard', activeView)}
+      ${isAdmin ? navButton('classes', 'Classes & Streams', activeView) : ''}
+      ${navButton('students', 'Students', activeView)}
+      ${navButton('attendance', 'Attendance', activeView)}
+    </nav>
+    <main id="main"></main>
+  `;
+  const views = { dashboard: renderDashboard, classes: renderClasses, students: renderStudents, attendance: renderAttendance };
+  views[activeView]();
+}
+
+function navButton(view, label, activeView) {
+  const active = view === activeView;
+  return `<button onclick="renderShell('${view}')"
+    class="px-4 py-2 rounded-lg text-sm font-medium transition ${active ? 'bg-brand-blue text-white' : 'bg-white text-brand-blueDark border border-brand-creamDeep hover:bg-brand-cream'}">
+    ${label}
+  </button>`;
+}
+
+// ---------------- DASHBOARD ----------------
+async function renderDashboard() {
+  const main = document.getElementById('main');
+  main.innerHTML = `<p class="text-gray-500">Loading…</p>`;
+  const { count: studentCount } = await supabaseClient.from('students').select('*', { count: 'exact', head: true }).eq('status', 'active');
+  const today = new Date().toISOString().slice(0, 10);
+  const { count: markedToday } = await supabaseClient.from('attendance').select('*', { count: 'exact', head: true }).eq('date', today);
+
+  main.innerHTML = `
+    <div class="grid sm:grid-cols-3 gap-4">
+      ${statCard('Active Students', studentCount ?? '—')}
+      ${statCard('Streams', streamsCache.length)}
+      ${statCard("Attendance Marked Today", markedToday ?? 0)}
+    </div>`;
+}
+
+function statCard(label, value) {
+  return `<div class="bg-white rounded-xl p-5 border border-brand-creamDeep shadow-sm">
+    <p class="text-2xl font-bold text-brand-blueDark">${value}</p>
+    <p class="text-sm text-gray-500">${label}</p>
+  </div>`;
+}
+
+// ---------------- CLASSES & STREAMS (admin only) ----------------
+async function renderClasses() {
+  const main = document.getElementById('main');
+  main.innerHTML = `
+    <div class="bg-white rounded-xl p-5 border border-brand-creamDeep mb-6">
+      <h2 class="font-semibold text-brand-blueDark mb-3">Add a stream</h2>
+      <form id="addStreamForm" class="flex flex-wrap gap-3">
+        <select id="streamClass" class="border border-gray-300 rounded-lg px-3 py-2">
+          ${classesCache.map(c => `<option value="${c.id}">${c.name}</option>`).join('')}
+        </select>
+        <input id="streamName" placeholder="Stream name e.g. East" required
+          class="border border-gray-300 rounded-lg px-3 py-2 flex-1 min-w-[150px]">
+        <button class="bg-brand-blue hover:bg-brand-blueDark text-white px-4 py-2 rounded-lg font-medium">Add</button>
+      </form>
+    </div>
+    <div id="streamList" class="space-y-3"></div>
+  `;
+  document.getElementById('addStreamForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const class_id = document.getElementById('streamClass').value;
+    const name = document.getElementById('streamName').value.trim();
+    if (!name) return;
+    const { error } = await supabaseClient.from('streams').insert({ class_id, name });
+    if (error) { alert(error.message); return; }
+    await loadStreams();
+    renderClasses();
+  });
+  renderStreamList();
+}
+
+function renderStreamList() {
+  const el = document.getElementById('streamList');
+  const byClass = {};
+  streamsCache.forEach(s => {
+    const cname = s.classes?.name || '—';
+    byClass[cname] = byClass[cname] || [];
+    byClass[cname].push(s);
+  });
+  el.innerHTML = Object.keys(byClass).sort().map(cname => `
+    <div class="bg-white rounded-xl p-4 border border-brand-creamDeep">
+      <p class="font-semibold text-brand-blueDark mb-1">${cname}</p>
+      <p class="text-sm text-gray-600">${byClass[cname].map(s => s.name).join(', ')}</p>
+    </div>
+  `).join('') || `<p class="text-gray-500 text-sm">No streams yet — add one above.</p>`;
+}
+
+// ---------------- STUDENTS ----------------
+async function renderStudents() {
+  const isAdmin = currentProfile.role === 'admin';
+  const main = document.getElementById('main');
+  main.innerHTML = `<p class="text-gray-500">Loading…</p>`;
+
+  let query = supabaseClient.from('students').select('*, streams(name, classes(name))').order('last_name');
+  const { data: students, error } = await query;
+  if (error) { main.innerHTML = `<p class="text-red-600">${error.message}</p>`; return; }
+
+  main.innerHTML = `
+    ${isAdmin ? `
+    <div class="bg-white rounded-xl p-5 border border-brand-creamDeep mb-6">
+      <h2 class="font-semibold text-brand-blueDark mb-3">Add a student</h2>
+      <form id="addStudentForm" class="grid sm:grid-cols-2 gap-3">
+        <input id="admNo" placeholder="Admission No." required class="border border-gray-300 rounded-lg px-3 py-2">
+        <select id="studentStream" required class="border border-gray-300 rounded-lg px-3 py-2">
+          <option value="">Select stream</option>
+          ${streamsCache.map(s => `<option value="${s.id}">${s.classes?.name} ${s.name}</option>`).join('')}
+        </select>
+        <input id="firstName" placeholder="First name" required class="border border-gray-300 rounded-lg px-3 py-2">
+        <input id="lastName" placeholder="Last name" required class="border border-gray-300 rounded-lg px-3 py-2">
+        <input id="guardianName" placeholder="Guardian name" class="border border-gray-300 rounded-lg px-3 py-2">
+        <input id="guardianPhone" placeholder="Guardian phone" class="border border-gray-300 rounded-lg px-3 py-2">
+        <button class="sm:col-span-2 bg-brand-blue hover:bg-brand-blueDark text-white px-4 py-2 rounded-lg font-medium">Add Student</button>
+      </form>
+    </div>` : ''}
+    <div class="bg-white rounded-xl border border-brand-creamDeep overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-brand-cream text-brand-blueDark text-left">
+          <tr>
+            <th class="px-4 py-2">Adm. No.</th><th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Class/Stream</th><th class="px-4 py-2">Guardian</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${(students || []).map(s => `
+            <tr class="border-t border-brand-creamDeep">
+              <td class="px-4 py-2">${s.admission_no}</td>
+              <td class="px-4 py-2">${s.first_name} ${s.last_name}</td>
+              <td class="px-4 py-2">${s.streams ? s.streams.classes.name + ' ' + s.streams.name : '—'}</td>
+              <td class="px-4 py-2">${s.guardian_name || '—'} ${s.guardian_phone ? '· ' + s.guardian_phone : ''}</td>
+            </tr>`).join('') || `<tr><td class="px-4 py-4 text-gray-500" colspan="4">No students yet.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  if (isAdmin) {
+    document.getElementById('addStudentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        admission_no: document.getElementById('admNo').value.trim(),
+        stream_id: document.getElementById('studentStream').value,
+        first_name: document.getElementById('firstName').value.trim(),
+        last_name: document.getElementById('lastName').value.trim(),
+        guardian_name: document.getElementById('guardianName').value.trim(),
+        guardian_phone: document.getElementById('guardianPhone').value.trim(),
+      };
+      const { error } = await supabaseClient.from('students').insert(payload);
+      if (error) { alert(error.message); return; }
+      renderStudents();
+    });
+  }
+}
+
+// ---------------- ATTENDANCE ----------------
+async function renderAttendance() {
+  const main = document.getElementById('main');
+  const isAdmin = currentProfile.role === 'admin';
+
+  let myStreams = streamsCache;
+  if (!isAdmin) {
+    const { data: assigned } = await supabaseClient.from('teacher_streams').select('stream_id').eq('teacher_id', currentUser.id);
+    const ids = new Set((assigned || []).map(a => a.stream_id));
+    myStreams = streamsCache.filter(s => ids.has(s.id));
+  }
+
+  main.innerHTML = `
+    <div class="bg-white rounded-xl p-5 border border-brand-creamDeep mb-6 flex flex-wrap gap-3 items-end">
+      <div>
+        <label class="text-xs text-gray-500 block mb-1">Stream</label>
+        <select id="attStream" class="border border-gray-300 rounded-lg px-3 py-2">
+          ${myStreams.map(s => `<option value="${s.id}">${s.classes?.name} ${s.name}</option>`).join('') || '<option>No streams assigned</option>'}
+        </select>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 block mb-1">Date</label>
+        <input type="date" id="attDate" value="${new Date().toISOString().slice(0,10)}" class="border border-gray-300 rounded-lg px-3 py-2">
+      </div>
+      <button id="loadAttBtn" class="bg-brand-blue hover:bg-brand-blueDark text-white px-4 py-2 rounded-lg font-medium">Load</button>
+    </div>
+    <div id="attList"></div>
+  `;
+  document.getElementById('loadAttBtn').addEventListener('click', loadAttendanceList);
+  if (myStreams.length) loadAttendanceList();
+}
+
+async function loadAttendanceList() {
+  const streamId = document.getElementById('attStream').value;
+  const date = document.getElementById('attDate').value;
+  const listEl = document.getElementById('attList');
+  listEl.innerHTML = `<p class="text-gray-500">Loading…</p>`;
+
+  const { data: students } = await supabaseClient.from('students').select('*').eq('stream_id', streamId).eq('status', 'active').order('last_name');
+  const { data: existing } = await supabaseClient.from('attendance').select('*').eq('stream_id', streamId).eq('date', date);
+  const existingMap = {};
+  (existing || []).forEach(a => existingMap[a.student_id] = a.status);
+
+  listEl.innerHTML = `
+    <div class="bg-white rounded-xl border border-brand-creamDeep overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-brand-cream text-brand-blueDark text-left">
+          <tr><th class="px-4 py-2">Student</th><th class="px-4 py-2">Status</th></tr>
+        </thead>
+        <tbody id="attRows">
+          ${(students || []).map(s => `
+            <tr class="border-t border-brand-creamDeep" data-student="${s.id}">
+              <td class="px-4 py-2">${s.first_name} ${s.last_name}</td>
+              <td class="px-4 py-2">
+                <select class="attStatus border border-gray-300 rounded-lg px-2 py-1">
+                  <option value="present" ${existingMap[s.id]==='present'?'selected':''}>Present</option>
+                  <option value="absent" ${existingMap[s.id]==='absent'?'selected':''}>Absent</option>
+                  <option value="late" ${existingMap[s.id]==='late'?'selected':''}>Late</option>
+                </select>
+              </td>
+            </tr>`).join('') || `<tr><td class="px-4 py-4 text-gray-500" colspan="2">No students in this stream yet.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+    ${students && students.length ? `<button id="saveAttBtn" class="mt-4 bg-brand-blue hover:bg-brand-blueDark text-white px-5 py-2 rounded-lg font-medium">Save Attendance</button>` : ''}
+  `;
+
+  const saveBtn = document.getElementById('saveAttBtn');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', async () => {
+      const rows = document.querySelectorAll('#attRows tr[data-student]');
+      const records = Array.from(rows).map(r => ({
+        student_id: r.dataset.student,
+        stream_id: streamId,
+        date: date,
+        status: r.querySelector('.attStatus').value,
+        marked_by: currentUser.id
+      }));
+      const { error } = await supabaseClient.from('attendance').upsert(records, { onConflict: 'student_id,date' });
+      if (error) { alert(error.message); return; }
+      saveBtn.textContent = 'Saved ✓';
+      setTimeout(() => saveBtn.textContent = 'Save Attendance', 1500);
+    });
+  }
+}
+
+boot();
+</script>
+</body>
+</html>
