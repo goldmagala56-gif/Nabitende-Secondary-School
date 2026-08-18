@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.nabitendess.ac.ug/sitemap.xml
+Sitemap: https://goldmagala56-gif.github.io/Nabitende-Secondary-School/sitemap.xml
