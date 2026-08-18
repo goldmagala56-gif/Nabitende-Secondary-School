@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <path d="M50 5 L90 20 L85 70 Q50 95 50 95 Q50 95 15 70 L10 20 Z" fill="#0c6693" stroke="#c9b183" stroke-width="3"/>
+  <path d="M50 15 L80 25 L76 65 Q50 85 50 85 Q50 85 24 65 L20 25 Z" fill="#4fa8d8" stroke="#c9b183" stroke-width="1.5"/>
+  <path d="M35 40 Q50 35 65 40 L65 60 Q50 55 35 60 Z" fill="#c9b183"/>
+  <path d="M35 40 Q50 45 65 40" fill="none" stroke="#0c6693" stroke-width="2"/>
+  <text x="50" y="72" text-anchor="middle" font-size="22" font-weight="bold" fill="#c9b183" font-family="serif">N</text>
+</svg>

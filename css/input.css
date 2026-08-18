@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nabitende Secondary School — shared custom styles (non-Tailwind) */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hamburger menu (mobile nav) */
+#mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+#mobile-menu.open {
+    max-height: 400px;
+}
+
+.hamburger-line {
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+#hamburger-btn[aria-expanded="true"] .hamburger-line-1 {
+    transform: translateY(7px) rotate(45deg);
+}
+
+#hamburger-btn[aria-expanded="true"] .hamburger-line-2 {
+    opacity: 0;
+}
+
+#hamburger-btn[aria-expanded="true"] .hamburger-line-3 {
+    transform: translateY(-7px) rotate(-45deg);
+}
