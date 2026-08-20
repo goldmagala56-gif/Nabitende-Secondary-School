@@ -40,48 +40,42 @@
     </script>
 </head>
 <body class="font-sans antialiased text-gray-900 bg-white">
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3">
-                <div class="relative w-12 h-12 flex items-center justify-center">
+        <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
+            <a href="index.html" class="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div class="relative w-9 h-9 sm:w-12 sm:h-12 flex-shrink-0 flex items-center justify-center">
                     <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
-                        <path d="M50 5 L90 20 L85 70 Q50 95 50 95 Q50 95 15 70 L10 20 Z" fill="#0c6693" stroke="#c9b183" stroke-width="3"/>
-                        <path d="M50 15 L80 25 L76 65 Q50 85 50 85 Q50 85 24 65 L20 25 Z" fill="#4fa8d8" stroke="#c9b183" stroke-width="1.5"/>
-                        <path d="M35 40 Q50 35 65 40 L65 60 Q50 55 35 60 Z" fill="#c9b183"/>
-                        <path d="M35 40 Q50 45 65 40" fill="none" stroke="#0c6693" stroke-width="2"/>
-                        <text x="50" y="72" text-anchor="middle" font-size="22" font-weight="bold" fill="#c9b183" font-family="serif">N</text>
+                        <path d="M50 5 L90 20 L85 70 Q50 95 50 95 Q50 95 15 70 L10 20 Z" fill="#2E6FC9" stroke="#C9AA73" stroke-width="3"/>
+                        <path d="M50 15 L80 25 L76 65 Q50 85 50 85 Q50 85 24 65 L20 25 Z" fill="#569CD6" stroke="#C9AA73" stroke-width="1.5"/>
+                        <path d="M35 40 Q50 35 65 40 L65 60 Q50 55 35 60 Z" fill="#C9AA73"/>
+                        <path d="M35 40 Q50 45 65 40" fill="none" stroke="#2E6FC9" stroke-width="2"/>
+                        <text x="50" y="72" text-anchor="middle" font-size="22" font-weight="bold" fill="#C9AA73" font-family="serif">N</text>
                     </svg>
                 </div>
-                <div>
-                    <p class="font-bold text-gray-900 text-lg leading-tight">Nabitende Secondary School</p>
-                    <p class="text-xs text-gray-500">Iganga District, Uganda</p>
+                <div class="min-w-0">
+                    <p class="font-bold text-gray-900 text-sm sm:text-lg leading-tight truncate">Nabitende Secondary School</p>
+                    <p class="hidden sm:block text-xs text-gray-500">Iganga District, Uganda</p>
                 </div>
             </a>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-                <a href="index.html" class="hover:text-school-blue transition-colors ">Home</a>
-
+                <a href="index.html" class="hover:text-school-blue transition-colors text-school-blue font-semibold">Home</a>
                 <a href="about.html" class="hover:text-school-blue transition-colors ">About</a>
-
                 <a href="academics.html" class="hover:text-school-blue transition-colors ">Academics</a>
-
                 <a href="admissions.html" class="hover:text-school-blue transition-colors ">Admissions</a>
-
                 <a href="gallery.html" class="hover:text-school-blue transition-colors ">Gallery</a>
-
                 <a href="news.html" class="hover:text-school-blue transition-colors ">News</a>
-
                 <a href="contact.html" class="hover:text-school-blue transition-colors ">Contact</a>
             </div>
             <button id="search-toggle-btn" aria-label="Search the site" aria-expanded="false" class="flex items-center justify-center w-10 h-10 text-gray-600 hover:text-school-blue transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </button>
-            <button id="hamburger-btn" aria-expanded="false" aria-label="Toggle menu" class="md:hidden flex flex-col justify-center gap-1.5 w-10 h-10 items-center">
-                <span class="hamburger-line hamburger-line-1 block w-6 h-0.5 bg-gray-700 rounded"></span>
-                <span class="hamburger-line hamburger-line-2 block w-6 h-0.5 bg-gray-700 rounded"></span>
-                <span class="hamburger-line hamburger-line-3 block w-6 h-0.5 bg-gray-700 rounded"></span>
+            <button id="hamburger-btn" aria-expanded="false" aria-label="Open menu" class="md:hidden flex flex-col justify-center gap-1.5 w-10 h-10 items-center flex-shrink-0">
+                <span class="block w-6 h-0.5 bg-gray-700 rounded"></span>
+                <span class="block w-6 h-0.5 bg-gray-700 rounded"></span>
+                <span class="block w-6 h-0.5 bg-gray-700 rounded"></span>
             </button>
-            <div class="flex items-center gap-3">
-                <a href="contact.html" class="px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-school-blue to-school-sky rounded-xl hover:shadow-lg hover:shadow-sky-200 transition-all">Apply Now</a>
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="contact.html" class="hidden sm:inline-flex px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-school-blue to-school-sky rounded-xl hover:shadow-lg hover:shadow-sky-200 transition-all">Apply Now</a>
             </div>
         </div>
     </nav>

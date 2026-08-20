@@ -13,10 +13,10 @@ module.exports = {
       },
       colors: {
         school: {
-          blue: "#4770f5",    // primary brand blue
-          sky: "#73c3f5",     // secondary/lighter blue for gradients & accents
-          accent: "#f3db6f",  // warm sand accent
-          cream: "#fdf79e",   // base cream
+          blue: "#2E6FC9",     // primary brand blue — clean, unambiguous blue (VS Code HTML-tag blue family, deepened for text contrast)
+          sky: "#569CD6",      // lighter blue for gradients & large accents — the exact VS Code HTML-tag blue
+          accent: "#C9AA73",   // warm tan accent (used sparingly — badges, icons)
+          cream: "#F0DFB8",    // concentrated cream — the site's background color
         },
       },
     },
