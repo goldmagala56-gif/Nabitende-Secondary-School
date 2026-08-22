@@ -7,13 +7,19 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!btn || !menu) return;
 
     btn.addEventListener('click', function () {
-        var isOpen = menu.classList.toggle('open');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        var isOpen = !menu.classList.contains('hidden');
+        if (isOpen) {
+            menu.classList.add('hidden');
+            btn.setAttribute('aria-expanded', 'false');
+        } else {
+            menu.classList.remove('hidden');
+            btn.setAttribute('aria-expanded', 'true');
+        }
     });
 
     menu.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
-            menu.classList.remove('open');
+            menu.classList.add('hidden');
             btn.setAttribute('aria-expanded', 'false');
         });
     });
