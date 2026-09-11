@@ -15,7 +15,3 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-npm run deploy
-git add .
-git commit -m "nabitende-app"
-git push
