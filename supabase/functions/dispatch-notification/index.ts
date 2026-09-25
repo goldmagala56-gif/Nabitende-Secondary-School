@@ -21,6 +21,83 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
 );
 
+// ---------------------------------------------------------------------
+// FCM v1 auth — uses the Firebase service account JSON (modern method,
+// replaces the old single "server key" string which is being retired).
+// Set the whole JSON file's contents as one secret:
+//   supabase secrets set FCM_SERVICE_ACCOUNT_JSON='{"type":"service_account",...}'
+// ---------------------------------------------------------------------
+let cachedToken: { token: string; expiresAt: number } | null = null;
+
+async function getFcmAccessToken(): Promise<string> {
+  if (cachedToken && cachedToken.expiresAt > Date.now() + 30_000) {
+    return cachedToken.token;
+  }
+
+  const raw = Deno.env.get("FCM_SERVICE_ACCOUNT_JSON")!;
+  const sa = JSON.parse(raw);
+
+  const header = { alg: "RS256", typ: "JWT" };
+  const now = Math.floor(Date.now() / 1000);
+  const claims = {
+    iss: sa.client_email,
+    scope: "https://www.googleapis.com/auth/firebase.messaging",
+    aud: "https://oauth2.googleapis.com/token",
+    iat: now,
+    exp: now + 3600,
+  };
+
+  const encode = (obj: unknown) =>
+    btoa(JSON.stringify(obj)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+
+  const unsigned = `${encode(header)}.${encode(claims)}`;
+
+  // Import the PEM private key for signing
+  const pem = sa.private_key
+    .replace("-----BEGIN PRIVATE KEY-----", "")
+    .replace("-----END PRIVATE KEY-----", "")
+    .replace(/\s/g, "");
+  const binaryKey = Uint8Array.from(atob(pem), (c) => c.charCodeAt(0));
+
+  const cryptoKey = await crypto.subtle.importKey(
+    "pkcs8",
+    binaryKey,
+    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+
+  const signature = await crypto.subtle.sign(
+    "RSASSA-PKCS1-v1_5",
+    cryptoKey,
+    new TextEncoder().encode(unsigned)
+  );
+
+  const encodedSig = btoa(String.fromCharCode(...new Uint8Array(signature)))
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+
+  const jwt = `${unsigned}.${encodedSig}`;
+
+  const res = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: jwt,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`FCM token exchange failed: ${await res.text()}`);
+  }
+
+  const data = await res.json();
+  cachedToken = { token: data.access_token, expiresAt: Date.now() + data.expires_in * 1000 };
+  return cachedToken.token;
+}
+
 type NotificationRow = {
   id: string;
   recipient_id: string | null;
@@ -121,25 +198,35 @@ async function sendPush(record: NotificationRow): Promise<boolean> {
 
   if (error || !tokens || tokens.length === 0) return false;
 
-  const fcmKey = Deno.env.get("FCM_SERVER_KEY")!;
+  const accessToken = await getFcmAccessToken();
+  const raw = Deno.env.get("FCM_SERVICE_ACCOUNT_JSON")!;
+  const projectId = JSON.parse(raw).project_id;
+
   let anySuccess = false;
 
   for (const { token } of tokens) {
-    const res = await fetch("https://fcm.googleapis.com/fcm/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `key=${fcmKey}`,
-      },
-      body: JSON.stringify({
-        to: token,
-        notification: {
-          title: record.title,
-          body: record.body,
+    const res = await fetch(
+      `https://fcm.googleapis.com/v1/projects/${projectId}/messages:send`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
-        data: record.data ?? {},
-      }),
-    });
+        body: JSON.stringify({
+          message: {
+            token,
+            notification: {
+              title: record.title,
+              body: record.body,
+            },
+            data: Object.fromEntries(
+              Object.entries(record.data ?? {}).map(([k, v]) => [k, String(v)])
+            ),
+          },
+        }),
+      }
+    );
     if (res.ok) anySuccess = true;
   }
 

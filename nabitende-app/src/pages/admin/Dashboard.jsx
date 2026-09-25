@@ -7,7 +7,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip,
   ResponsiveContainer, Cell
 } from 'recharts'
-import api from '../../api'
+import { supabase } from '../../lib/supabaseClient'
 import { useNavigate } from 'react-router-dom'
 
 const BAR_COLORS = ['#1a6b4a', '#1a6b4a', '#f59e0b', '#1a6b4a', '#dc2626', '#1a6b4a']
@@ -26,13 +26,58 @@ export default function AdminDashboard() {
   async function loadDashboard() {
     setLoading(true)
     try {
-      const [dashRes, annRes] = await Promise.all([
-        api.get('/dashboard/admin'),
-        api.get('/announcements'),
+      const today = new Date().toISOString().slice(0, 10)
+
+      const [
+        { count: totalStudents },
+        { count: totalTeachers },
+        { data: todayAttendance },
+        { data: feeRows },
+        { data: announcementRows },
+      ] = await Promise.all([
+        supabase.from('students').select('*', { count: 'exact', head: true }).eq('status', 'active'),
+        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'teacher'),
+        supabase.from('attendance').select('status, streams(name, classes(name))').eq('date', today),
+        supabase.from('fees').select('term_fee, paid, status'),
+        supabase.from('announcements').select('*').order('created_at', { ascending: false }).limit(3),
       ])
-      setStats(dashRes.data.stats)
-      setAttendanceByClass(dashRes.data.attendanceByClass || [])
-      setAnnouncements((annRes.data.announcements || []).slice(0, 3))
+
+      let attendanceToday = null
+      if (todayAttendance?.length) {
+        const present = todayAttendance.filter(a => a.status === 'present').length
+        attendanceToday = Math.round((present / todayAttendance.length) * 100)
+      }
+
+      const byClass = {}
+      ;(todayAttendance || []).forEach(a => {
+        const className = a.streams?.classes?.name
+        if (!className) return
+        byClass[className] ??= { present: 0, total: 0 }
+        byClass[className].total += 1
+        if (a.status === 'present') byClass[className].present += 1
+      })
+
+      let feesCollectedPct = null
+      let overdueCount = 0
+      if (feeRows?.length) {
+        const totalFee = feeRows.reduce((sum, f) => sum + Number(f.term_fee), 0)
+        const totalPaid = feeRows.reduce((sum, f) => sum + Number(f.paid), 0)
+        feesCollectedPct = totalFee > 0 ? Math.round((totalPaid / totalFee) * 100) : null
+        overdueCount = feeRows.filter(f => f.status === 'overdue').length
+      }
+
+      setStats({
+        totalStudents: totalStudents ?? 0,
+        totalTeachers: totalTeachers ?? 0,
+        attendanceToday,
+        attendanceDate: today,
+        feesCollectedPct,
+        overdueCount,
+      })
+      setAttendanceByClass(
+        Object.entries(byClass).map(([cls, v]) => ({ class: cls, pct: Math.round((v.present / v.total) * 100) }))
+      )
+      setAnnouncements(announcementRows || [])
     } catch (err) {
       console.error('Failed to load dashboard:', err)
     } finally {

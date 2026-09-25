@@ -3,7 +3,8 @@ import {
   TrendingUp, TrendingDown, AlertCircle, CheckCircle2
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import api from '../../api'
+import { supabase } from '../../lib/supabaseClient'
+import { useAuth } from '../../context/AuthContext'
 
 function gradeLetter(score) {
   if (score >= 80) return 'A'
@@ -17,6 +18,7 @@ function dayLabel(dateStr) {
 }
 
 export default function ParentDashboard() {
+  const { user } = useAuth()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -24,24 +26,75 @@ export default function ParentDashboard() {
   const [announcements, setAnnouncements] = useState([])
 
   useEffect(() => {
-    loadDashboard()
-  }, [])
+    if (user) loadDashboard()
+  }, [user])
 
   async function loadDashboard() {
-  setLoading(true)
-  try {
-    const [dashRes, annRes] = await Promise.all([
-      api.get('/dashboard/parent'),
-      api.get('/announcements'),
-    ])
-    setData(dashRes.data)
-    setAnnouncements((annRes.data.announcements || []).slice(0, 3))
-  } catch (err) {
-    console.error('Failed to load parent dashboard:', err)
-  } finally {
-    setLoading(false)
+    setLoading(true)
+    try {
+      const { data: links, count: childrenCount } = await supabase
+        .from('parent_students')
+        .select('student_id', { count: 'exact' })
+        .eq('parent_id', user.id)
+
+      if (!links || links.length === 0) {
+        setData({ child: null })
+        setLoading(false)
+        return
+      }
+
+      const primaryStudentId = links[0].student_id
+
+      const [
+        { data: studentRow },
+        { data: attendanceRows },
+        { data: feeRow },
+        { data: gradeRows },
+        { data: announcementRows },
+        { data: notificationRows },
+      ] = await Promise.all([
+        supabase.from('students').select('id, first_name, last_name, admission_no, streams(name, classes(name))').eq('id', primaryStudentId).single(),
+        supabase.from('attendance').select('date, status').eq('student_id', primaryStudentId).order('date', { ascending: false }).limit(7),
+        supabase.from('fees').select('*').eq('student_id', primaryStudentId).order('created_at', { ascending: false }).limit(1).maybeSingle(),
+        supabase.from('grades').select('subject, score, created_at').eq('student_id', primaryStudentId).order('created_at', { ascending: false }),
+        supabase.from('announcements').select('*').order('created_at', { ascending: false }).limit(3),
+        supabase.from('notifications').select('*').eq('recipient_id', user.id).order('created_at', { ascending: false }).limit(5),
+      ])
+
+      const bySubject = {}
+      ;(gradeRows || []).forEach(g => {
+        bySubject[g.subject] ??= []
+        bySubject[g.subject].push(g)
+      })
+      const recentGrades = Object.entries(bySubject).map(([subject, rows]) => {
+        const latest = rows[0]
+        const prev = rows[1]
+        return {
+          subject,
+          score: latest.score,
+          trend: prev ? (latest.score >= prev.score ? 'up' : 'down') : null,
+        }
+      })
+
+      setData({
+        child: studentRow ? {
+          name: `${studentRow.first_name} ${studentRow.last_name}`,
+          class: `${studentRow.streams?.classes?.name ?? ''} ${studentRow.streams?.name ?? ''}`.trim(),
+          admNo: studentRow.admission_no,
+        } : null,
+        childrenCount: childrenCount ?? 1,
+        weekAttendance: (attendanceRows || []).reverse().map(a => ({ date: a.date, present: a.status === 'present' })),
+        fee: feeRow || null,
+        recentGrades,
+      })
+      setAnnouncements(announcementRows || [])
+      setNotifications(notificationRows || [])
+    } catch (err) {
+      console.error('Failed to load parent dashboard:', err)
+    } finally {
+      setLoading(false)
+    }
   }
-}
 
   if (loading) {
     return <p className="text-[13px] text-[var(--color-text-muted)]">Loading dashboard…</p>

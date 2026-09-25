@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react'
-import api from '../api'
+import { createContext, useContext, useState, useEffect } from 'react'
+import { supabase } from '../lib/supabaseClient'
 
 const AuthContext = createContext(null)
 
@@ -8,43 +8,67 @@ const ROLE_HOME = {
   teacher:    '/teacher/dashboard',
   parent:     '/parent/dashboard',
   student:    '/student/dashboard',
-  government: '/government/dashboard',
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('educonnect_user')
-    return saved ? JSON.parse(saved) : null
-  })
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  async function login(email, password) {
-    try {
-      const response = await api.post('/auth/login', { email, password })
-      const { ok, token, user: userData, error } = response.data
+  useEffect(() => {
+    // On load, check if a Supabase session already exists
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) loadProfile(session.user)
+      else setLoading(false)
+    })
 
-      if (!ok) return { ok: false, error }
+    // Keep user in sync if the session changes elsewhere (tab refresh, sign out, etc.)
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) loadProfile(session.user)
+      else { setUser(null); setLoading(false) }
+    })
 
-      // Save token and user to localStorage
-      localStorage.setItem('educonnect_token', token)
-      localStorage.setItem('educonnect_user', JSON.stringify(userData))
-      setUser(userData)
+    return () => listener.subscription.unsubscribe()
+  }, [])
 
-      return { ok: true, home: ROLE_HOME[userData.role] }
+  async function loadProfile(authUser) {
+    const { data: profile, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', authUser.id)
+      .single()
 
-    } catch (err) {
-      const message = err.response?.data?.error || 'Login failed. Please try again.'
-      return { ok: false, error: message }
+    if (error) {
+      console.error('Failed to load profile:', error)
+      setUser(null)
+    } else {
+      setUser({ ...profile, email: authUser.email })
     }
+    setLoading(false)
   }
 
-  function logout() {
+  async function login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) return { ok: false, error: error.message }
+
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', data.user.id)
+      .single()
+
+    if (profileError) return { ok: false, error: 'Could not load user profile.' }
+
+    setUser({ ...profile, email: data.user.email })
+    return { ok: true, home: ROLE_HOME[profile.role] }
+  }
+
+  async function logout() {
+    await supabase.auth.signOut()
     setUser(null)
-    localStorage.removeItem('educonnect_token')
-    localStorage.removeItem('educonnect_user')
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   )

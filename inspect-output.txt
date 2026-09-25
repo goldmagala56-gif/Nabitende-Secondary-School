@@ -1,0 +1,77 @@
+﻿=== ROOT package.json ===
+{
+  "name": "school",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/style.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./css/style.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "supabase": "^2.117.0",
+    "tailwindcss": "^3.4.19"
+  }
+}
+
+=== ROOT-LEVEL FILES ===
+.gitignore
+404.html
+about.html
+academics.html
+admissions.html
+alumni.html
+app.html
+calendar.html
+contact.html
+downloads.html
+faq.html
+favicon.svg
+fees.html
+gallery.html
+index.html
+inspect-output.txt
+inspect.ps1
+news.html
+package-lock.json
+package.json
+Readme forms.MD
+readme.MD
+robots.txt
+sitemap.xml
+staff.html
+tailwind.config.js
+
+=== ROOT 'src' FOLDER ===
+input.css
+
+=== ROOT 'supabase' FOLDER ===
+.temp
+functions
+migrations
+.gitignore
+config.toml
+.temp\cli-latest
+.temp\gotrue-version
+.temp\linked-project.json
+.temp\pooler-url
+.temp\postgres-version
+.temp\project-ref
+.temp\rest-version
+.temp\storage-migration
+.temp\storage-version
+functions\dispatch-notification
+functions\dispatch-notification\index.ts
+migrations\schema(2).sql
+migrations\schema.sql
+
+=== 'css' FOLDER ===
+input.css
+style.css
+
+=== 'js' FOLDER ===
+main.js

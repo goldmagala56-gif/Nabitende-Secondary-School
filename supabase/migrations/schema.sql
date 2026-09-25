@@ -138,3 +138,27 @@ create policy "admin deletes attendance" on attendance
 insert into classes (name, order_index) values
   ('S1', 1), ('S2', 2), ('S3', 3), ('S4', 4), ('S5', 5), ('S6', 6)
 on conflict (name) do nothing;
+
+-- Let a student log in and be found from their own auth account
+alter table students add column if not exists user_id uuid unique references auth.users(id);
+
+-- Multiple parents per child, multiple children per parent — more realistic than 1:1
+create table if not exists parent_students (
+  parent_id  uuid not null references profiles(id) on delete cascade,
+  student_id uuid not null references students(id) on delete cascade,
+  primary key (parent_id, student_id)
+);
+alter table parent_students enable row level security;
+
+create policy "parent views own links or admin" on parent_students
+  for select using (parent_id = auth.uid() or is_admin());
+create policy "admin manages parent links" on parent_students
+  for all using (is_admin());
+
+-- Parents can now see their own linked children
+create policy "parent views own children" on students
+  for select using (
+    is_admin()
+    or is_teacher_of(stream_id)
+    or exists (select 1 from parent_students where student_id = students.id and parent_id = auth.uid())
+  );

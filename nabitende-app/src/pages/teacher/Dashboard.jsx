@@ -3,7 +3,8 @@ import {
   BookOpen, ClipboardCheck, Users, MessageSquare,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import api from '../../api'
+import { supabase } from '../../lib/supabaseClient'
+import { useAuth } from '../../context/AuthContext'
 
 function timeAgo(dateStr) {
   const diff  = Date.now() - new Date(dateStr).getTime()
@@ -17,6 +18,7 @@ function timeAgo(dateStr) {
 }
 
 export default function TeacherDashboard() {
+  const { user } = useAuth()
   const [stats, setStats] = useState(null)
   const [attendanceSummary, setAttendanceSummary] = useState([])
   const [recentMessages, setRecentMessages] = useState([])
@@ -24,16 +26,72 @@ export default function TeacherDashboard() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    loadDashboard()
-  }, [])
+    if (user) loadDashboard()
+  }, [user])
 
   async function loadDashboard() {
     setLoading(true)
     try {
-      const res = await api.get('/dashboard/teacher')
-      setStats(res.data.stats)
-      setAttendanceSummary(res.data.attendanceSummary || [])
-      setRecentMessages(res.data.recentMessages || [])
+      const { data: teacherStreams } = await supabase
+        .from('teacher_streams')
+        .select('stream_id, streams(name, classes(name))')
+        .eq('teacher_id', user.id)
+
+      const streamIds = (teacherStreams || []).map(ts => ts.stream_id)
+      const classLabels = (teacherStreams || []).map(
+        ts => `${ts.streams?.classes?.name ?? ''} ${ts.streams?.name ?? ''}`.trim()
+      )
+
+      if (streamIds.length === 0) {
+        setStats({ classCount: 0, totalStudents: 0, classesMarked: 0, unreadCount: 0, classes: [], latestDate: null })
+        setAttendanceSummary([])
+        setLoading(false)
+        return
+      }
+
+      const { count: totalStudents } = await supabase
+        .from('students')
+        .select('*', { count: 'exact', head: true })
+        .in('stream_id', streamIds)
+        .eq('status', 'active')
+
+      const { data: latestRow } = await supabase
+        .from('attendance')
+        .select('date')
+        .in('stream_id', streamIds)
+        .order('date', { ascending: false })
+        .limit(1)
+        .maybeSingle()
+
+      const latestDate = latestRow?.date ?? null
+      let summaryByStream = []
+      if (latestDate) {
+        const { data: attendanceRows } = await supabase
+          .from('attendance')
+          .select('status, stream_id, streams(name, classes(name))')
+          .in('stream_id', streamIds)
+          .eq('date', latestDate)
+
+        const grouped = {}
+        ;(attendanceRows || []).forEach(a => {
+          const label = `${a.streams?.classes?.name ?? ''} ${a.streams?.name ?? ''}`.trim()
+          grouped[label] ??= { present: 0, total: 0 }
+          grouped[label].total += 1
+          if (a.status === 'present') grouped[label].present += 1
+        })
+        summaryByStream = Object.entries(grouped).map(([cls, v]) => ({ class: cls, present: v.present, total: v.total }))
+      }
+
+      setStats({
+        classCount: streamIds.length,
+        totalStudents: totalStudents ?? 0,
+        classesMarked: summaryByStream.length,
+        unreadCount: 0,
+        classes: classLabels,
+        latestDate,
+      })
+      setAttendanceSummary(summaryByStream)
+      setRecentMessages([])
     } catch (err) {
       console.error('Failed to load teacher dashboard:', err)
     } finally {
@@ -42,7 +100,7 @@ export default function TeacherDashboard() {
   }
 
   const statCards = stats ? [
-    { label: 'My classes',      value: String(stats.classCount),   sub: stats.subject || '',        color: '#1a6b4a', icon: BookOpen },
+    { label: 'My classes',      value: String(stats.classCount),   sub: '',                          color: '#1a6b4a', icon: BookOpen },
     { label: 'Students taught', value: String(stats.totalStudents), sub: 'across all classes',       color: '#2563eb', icon: Users },
     { label: 'Attendance marked', value: `${stats.classesMarked}/${stats.classCount}`, sub: stats.latestDate ? `as of ${new Date(stats.latestDate).toLocaleDateString()}` : 'no records yet', color: '#f59e0b', icon: ClipboardCheck },
     { label: 'Unread messages', value: String(stats.unreadCount),  sub: 'need reply',               color: '#7c3aed', icon: MessageSquare },
@@ -56,7 +114,7 @@ export default function TeacherDashboard() {
           My Dashboard
         </h1>
         <p className="text-[var(--color-text-muted)] text-sm mt-0.5">
-          {stats?.subject ? `${stats.subject} Dept.` : 'Teacher overview'}
+          Teacher overview
         </p>
       </div>
 
@@ -112,7 +170,7 @@ export default function TeacherDashboard() {
                         className="flex items-center justify-between p-3 rounded-lg border border-[var(--color-border)]">
                         <div>
                           <div className="text-[13px] font-medium text-[var(--color-text)]">
-                            {stats.subject} · {className}
+                            {className}
                           </div>
                           <div className="text-[11px] text-[var(--color-text-muted)]">
                             {marked ? `${marked.present}/${marked.total} present` : 'Not marked yet'}
