@@ -43,6 +43,7 @@ import TeacherReports from './pages/teacher/Reports'
 import AdminTeacherReports from './pages/admin/TeacherReports'
 import StudentAttendance from './pages/student/Attendance'
 import StudentSyllabus from './pages/student/Syllabus'
+import InstallPrompt from './components/InstallPrompt'
 
 
 
@@ -146,6 +147,7 @@ export default function App() {
 
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <InstallPrompt />
       </BrowserRouter>
     </AuthProvider>
   )
