@@ -4,19 +4,19 @@ import { useAuth } from '../../context/AuthContext'
 import { School, Eye, EyeOff, LogIn } from 'lucide-react'
 
 const ROLE_HINTS = [
-  { role: 'School Head', email: 'admin@educonnect.ug',   color: '#ea580c', bg: '#fff7ed' },
-  { role: 'Teacher',     email: 'teacher@educonnect.ug', color: '#1a6b4a', bg: '#f0fdf4' },
-  { role: 'Parent',      email: 'parent@educonnect.ug',  color: '#0891b2', bg: '#ecfeff' },
-  { role: 'Student',     email: 'student@educonnect.ug', color: '#7c3aed', bg: '#faf5ff' },
-  { role: 'Government',  email: 'gov@educonnect.ug',     color: '#1d4ed8', bg: '#eff6ff' },
+  { role: 'School Head', email: 'admin@Nabitende-ss.ug',   color: '#ea580c', bg: '#fff7ed' },
+  { role: 'Teacher',     email: 'teacher@Nabitende-ss.ug', color: '#1a6b4a', bg: '#f0fdf4' },
+  { role: 'Parent',      email: 'parent@Nabitende-ss.ug',  color: '#0891b2', bg: '#ecfeff' },
+  { role: 'Student',     email: 'student@Nabitende-ss.ug', color: '#7c3aed', bg: '#faf5ff' },
+  { role: 'Government',  email: 'gov@Nabitende-ss.ug',     color: '#1d4ed8', bg: '#eff6ff' },
 ]
 
 const PASSWORD_MAP = {
-  'admin@educonnect.ug':   'admin123',
-  'teacher@educonnect.ug': 'teacher123',
-  'parent@educonnect.ug':  'parent123',
-  'student@educonnect.ug': 'student123',
-  'gov@educonnect.ug':     'gov123',
+  'admin@Nabitende-ss.ug':   'admin123',
+  'teacher@Nabitende-ss.ug': 'teacher123',
+  'parent@Nabitende-ss.ug':  'parent123',
+  'student@Nabitende-ss.ug': 'student123',
+  'gov@Nabitende-ss.ug':     'gov123',
 }
 
 export default function Login() {
@@ -59,7 +59,7 @@ export default function Login() {
               <School size={20} className="text-white" />
             </div>
             <span className="text-[18px] font-bold tracking-tight">
-              EduConnect
+              Nabitende-ss
             </span>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function Login() {
               <School size={20} className="text-white" />
             </div>
             <span className="text-[18px] font-bold text-[var(--color-text)]">
-              EduConnect
+              Nabitende-ss
             </span>
           </div>
 
@@ -141,7 +141,7 @@ export default function Login() {
               Welcome back
             </h2>
             <p className="text-[15px] text-[var(--color-text-muted)]">
-              Sign in to your EduConnect account
+              Sign in to your Nabitende-ss account
             </p>
           </div>
 
@@ -177,7 +177,7 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="you@educonnect.ug"
+                placeholder="you@Nabitende-ss.ug"
                 required
                 className="w-full px-4 py-3.5 rounded-xl
                   border-2 border-[var(--color-border)]
@@ -254,7 +254,7 @@ export default function Login() {
 
           {/* Footer note */}
           <p className="mt-10 text-center text-[13px] text-[var(--color-text-muted)]">
-            EduConnect · Uganda · Term 2, 2026
+            Nabitende-ss · Uganda · Term 2, 2026
           </p>
         </div>
       </div>

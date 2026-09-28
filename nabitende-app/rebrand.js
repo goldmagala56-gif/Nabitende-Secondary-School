@@ -1,5 +1,5 @@
 // rebrand.js
-// One-time bulk find/replace: EduConnect green branding -> Nabitende SS palette.
+// One-time bulk find/replace: Nabitende-ss green branding -> Nabitende SS palette.
 // Run from the nabitende-app project root:
 //   node rebrand.js
 //
@@ -19,7 +19,7 @@ const EXTENSIONS = new Set(['.jsx', '.js', '.css', '.html']);
 // partially clobber a longer hex/string with a shorter one.
 const REPLACEMENTS = [
   // Text branding
-  ['EduConnect', 'Nabitende SS'],
+  ['Nabitende-ss', 'Nabitende SS'],
 
   // Role label (Sidebar.jsx nav label only — route paths like
   // /government/dashboard are left alone on purpose)

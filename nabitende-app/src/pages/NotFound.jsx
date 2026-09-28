@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="text-6xl font-bold text-[var(--color-border)]">404</div>
       <h1 className="text-xl font-semibold text-[var(--color-text)]">Page not found</h1>
       <p className="text-[var(--color-text-muted)] text-sm">
-        This page doesn't exist in EduConnect yet.
+        This page doesn't exist in Nabitende-ss yet.
       </p>
       <button
         onClick={() => navigate('/admin/dashboard')}

@@ -269,7 +269,7 @@ function cancelMessage() {
               </div>
               {!minimized && (
                 <div className="text-[10px] text-white/70">
-                  Powered by Claude AI · EduConnect
+                  Powered by Claude AI · Nabitende-ss
                 </div>
               )}
             </div>

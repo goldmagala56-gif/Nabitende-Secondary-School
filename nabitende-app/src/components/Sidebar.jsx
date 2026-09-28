@@ -174,7 +174,7 @@ export default function Sidebar({ role, open, onClose, onLogout }) {
             </div>
             <div>
               <div className="text-[14px] font-semibold text-[var(--color-text)] leading-none">
-                EduConnect
+                Nabitende-ss
               </div>
               <div className="text-[11px] text-[var(--color-text-muted)] mt-0.5">
                 {config.label} portal
