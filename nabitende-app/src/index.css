@@ -1,6 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ─── Tailwind v4 theme tokens (school-* utility classes) ─────── */
+@theme {
+  --color-school-blue:        #007ACC;
+  --color-school-blue-hover:  #0069ad;
+  --color-school-blue-active: #005c99;
+  --color-school-sky:         #1F9CF0;
+  --color-school-navy:        #0B1B3F;
+  --color-school-accent:      #D9A438;
+  --color-school-cream:       #F2E9D8;
+
+  --font-heading: 'Times New Roman', Times, serif;
+  --font-accent:  'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
 /* ─── Design tokens ─────────────────────────────────────────────── */
 :root {
   --color-primary:    #007ACC;
@@ -185,3 +202,4 @@ textarea:focus {
 .space-y-2 > * + * {
   margin-top: 8px !important;
 }
+
