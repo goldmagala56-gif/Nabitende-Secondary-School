@@ -120,7 +120,7 @@ export default function AdminSubjects() {
         <button
           onClick={() => { setShowForm(s => !s); setEditSubject(null) }}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl
-            bg-[#1a6b4a] hover:bg-[#15573c] text-white
+            bg-school-blue hover:bg-school-blue-hover text-white
             text-[13px] font-semibold transition-colors">
           <Plus size={16} />
           Add subject
@@ -133,14 +133,14 @@ export default function AdminSubjects() {
         <StatCard
           label="Total subjects"
           value={subjects.length}
-          color="#1a6b4a"
+          color="#007ACC"
           icon={BookOpen}
           sub="offered this term"
         />
         <StatCard
           label="O-Level"
           value={subjects.filter(s => s.level === 'O-Level').length}
-          color="#2563eb"
+          color="#1F9CF0"
           icon={BookOpen}
           sub="ordinary level"
         />
@@ -154,7 +154,7 @@ export default function AdminSubjects() {
         <StatCard
           label="Categories"
           value={new Set(subjects.map(s => s.category)).size}
-          color="#f59e0b"
+          color="#D9A438"
           icon={BookOpen}
           sub="subject groups"
         />
@@ -179,8 +179,8 @@ export default function AdminSubjects() {
                   placeholder="e.g. Mathematics"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
               <div>
@@ -199,8 +199,8 @@ export default function AdminSubjects() {
                   maxLength={10}
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
               <div>
@@ -216,7 +216,7 @@ export default function AdminSubjects() {
                     className="w-full appearance-none px-3.5 py-2.5
                       rounded-xl border-2 border-[var(--color-border)]
                       bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
+                      focus:outline-none focus:border-school-blue
                       transition-all">
                     {CATEGORIES.map(c => (
                       <option key={c} value={c}>{c}</option>
@@ -242,7 +242,7 @@ export default function AdminSubjects() {
                     className="w-full appearance-none px-3.5 py-2.5
                       rounded-xl border-2 border-[var(--color-border)]
                       bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
+                      focus:outline-none focus:border-school-blue
                       transition-all">
                     {LEVELS.map(l => (
                       <option key={l} value={l}>{l}</option>
@@ -266,8 +266,8 @@ export default function AdminSubjects() {
                 Cancel
               </button>
               <button type="submit" disabled={saving}
-                className="px-5 py-2.5 rounded-xl bg-[#1a6b4a]
-                  hover:bg-[#15573c] text-white text-[13px]
+                className="px-5 py-2.5 rounded-xl bg-school-blue
+                  hover:bg-school-blue-hover text-white text-[13px]
                   font-semibold transition-colors
                   disabled:opacity-60 disabled:cursor-not-allowed">
                 {saving
@@ -287,7 +287,7 @@ export default function AdminSubjects() {
           className={`px-3 py-1.5 rounded-full text-[12px]
             font-semibold border-2 transition-colors ${
             filterCat === 'All'
-              ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+              ? 'bg-school-blue text-white border-school-blue'
               : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
             }`}>
           All categories
@@ -314,7 +314,7 @@ export default function AdminSubjects() {
               className={`px-3 py-1.5 rounded-full text-[12px]
                 font-semibold border-2 transition-colors ${
                 filterLevel === lvl
-                  ? 'bg-[#2563eb] text-white border-[#2563eb]'
+                  ? 'bg-school-sky text-white border-school-sky'
                   : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
                 }`}>
               {lvl}
@@ -326,8 +326,8 @@ export default function AdminSubjects() {
       {/* Subjects grouped by category */}
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-            border-t-[#1a6b4a] rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-school-blue/20
+            border-t-school-blue rounded-full animate-spin" />
         </div>
       ) : Object.keys(grouped).length === 0 ? (
         <SectionCard>
@@ -389,7 +389,7 @@ export default function AdminSubjects() {
                         className="p-2 rounded-lg border-2
                           border-[var(--color-border)]
                           text-[var(--color-text-muted)]
-                          hover:text-[#2563eb] hover:border-blue-200
+                          hover:text-school-sky hover:border-blue-200
                           hover:bg-blue-50 transition-colors">
                         <Pencil size={14} />
                       </button>

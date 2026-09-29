@@ -115,7 +115,7 @@ async function handleDelete(id) {
         <button
           onClick={() => setShowForm(s => !s)}
           className="flex items-center gap-2 px-4 py-2.5 rounded-lg
-            bg-[#1a6b4a] hover:bg-[#15573c] text-white text-[13px] font-medium
+            bg-school-blue hover:bg-school-blue-hover text-white text-[13px] font-medium
             transition-colors">
           <Plus size={16} />
           New announcement
@@ -141,7 +141,7 @@ async function handleDelete(id) {
               className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--color-border)]
                 bg-[var(--color-bg)] text-[14px] text-[var(--color-text)]
                 placeholder:text-[var(--color-text-muted)]
-                focus:outline-none focus:ring-2 focus:ring-[#1a6b4a]/30 focus:border-[#1a6b4a]"
+                focus:outline-none focus:ring-2 focus:ring-school-blue/30 focus:border-school-blue"
             />
             <textarea
               value={form.body}
@@ -151,7 +151,7 @@ async function handleDelete(id) {
               className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--color-border)]
                 bg-[var(--color-bg)] text-[14px] text-[var(--color-text)]
                 placeholder:text-[var(--color-text-muted)] resize-none
-                focus:outline-none focus:ring-2 focus:ring-[#1a6b4a]/30 focus:border-[#1a6b4a]"
+                focus:outline-none focus:ring-2 focus:ring-school-blue/30 focus:border-school-blue"
             />
             <div className="flex flex-wrap gap-3">
               <select
@@ -159,7 +159,7 @@ async function handleDelete(id) {
                 onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
                 className="px-3 py-2 rounded-lg border border-[var(--color-border)]
                   bg-[var(--color-surface)] text-[13px] text-[var(--color-text)]
-                  focus:outline-none focus:ring-2 focus:ring-[#1a6b4a]/30 focus:border-[#1a6b4a]">
+                  focus:outline-none focus:ring-2 focus:ring-school-blue/30 focus:border-school-blue">
                 {categories.map(c => <option key={c}>{c}</option>)}
               </select>
               <select
@@ -167,7 +167,7 @@ async function handleDelete(id) {
                 onChange={e => setForm(f => ({ ...f, target: e.target.value }))}
                 className="px-3 py-2 rounded-lg border border-[var(--color-border)]
                   bg-[var(--color-surface)] text-[13px] text-[var(--color-text)]
-                  focus:outline-none focus:ring-2 focus:ring-[#1a6b4a]/30 focus:border-[#1a6b4a]">
+                  focus:outline-none focus:ring-2 focus:ring-school-blue/30 focus:border-school-blue">
                 {targets.map(t => <option key={t}>{t}</option>)}
               </select>
               <label className="flex items-center gap-2 cursor-pointer text-[13px]
@@ -176,7 +176,7 @@ async function handleDelete(id) {
                   type="checkbox"
                   checked={form.pinned}
                   onChange={e => setForm(f => ({ ...f, pinned: e.target.checked }))}
-                  className="w-4 h-4 accent-[#1a6b4a]"
+                  className="w-4 h-4 accent-school-blue"
                 />
                 Pin to top
               </label>
@@ -186,7 +186,7 @@ async function handleDelete(id) {
                 onClick={handlePost}
                 disabled={!form.title.trim() || !form.body.trim()}
                 className="flex items-center gap-2 px-5 py-2.5 rounded-lg
-                  bg-[#1a6b4a] hover:bg-[#15573c] text-white text-[13px] font-medium
+                  bg-school-blue hover:bg-school-blue-hover text-white text-[13px] font-medium
                   transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                 <Send size={15} />
                 Post announcement
@@ -205,7 +205,7 @@ async function handleDelete(id) {
             className={`px-3 py-1.5 rounded-full text-[12px] font-medium
               border transition-colors ${
               filter === t
-                ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                ? 'bg-school-blue text-white border-school-blue'
                 : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-bg)]'
             }`}>
             {t}
@@ -225,7 +225,7 @@ async function handleDelete(id) {
             return (
               <div key={a.id}
                 className={`bg-[var(--color-surface)] rounded-lg border p-5
-                  ${a.pinned ? 'border-[#1a6b4a]/30' : 'border-[var(--color-border)]'}`}
+                  ${a.pinned ? 'border-school-blue/30' : 'border-[var(--color-border)]'}`}
                 style={{ boxShadow: 'var(--shadow-sm)' }}>
                 {editingId === a.id ? (
                   <div className="space-y-3">
@@ -248,7 +248,7 @@ async function handleDelete(id) {
                         Cancel
                       </button>
                       <button onClick={() => saveEdit(a.id)}
-                        className="px-4 py-2 rounded-lg bg-[#1a6b4a] text-white text-[13px] font-medium">
+                        className="px-4 py-2 rounded-lg bg-school-blue text-white text-[13px] font-medium">
                         Save
                       </button>
                     </div>
@@ -257,7 +257,7 @@ async function handleDelete(id) {
                   <div className="flex items-start gap-3 flex-wrap">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap mb-1">
-                        {a.pinned && <Pin size={13} className="text-[#1a6b4a] flex-shrink-0" />}
+                        {a.pinned && <Pin size={13} className="text-school-blue flex-shrink-0" />}
                         <h3 className="text-[14px] font-semibold text-[var(--color-text)]">{a.title}</h3>
                       </div>
                       <p className="text-[13px] text-[var(--color-text-muted)] leading-relaxed">{a.body}</p>

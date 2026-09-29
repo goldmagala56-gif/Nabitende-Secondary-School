@@ -10,7 +10,7 @@ import {
 import { supabase } from '../../lib/supabaseClient'
 import { useNavigate } from 'react-router-dom'
 
-const BAR_COLORS = ['#1a6b4a', '#1a6b4a', '#f59e0b', '#1a6b4a', '#dc2626', '#1a6b4a']
+const BAR_COLORS = ['#007ACC', '#007ACC', '#D9A438', '#007ACC', '#dc2626', '#007ACC']
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null)
@@ -86,9 +86,9 @@ export default function AdminDashboard() {
   }
 
   const statCards = stats ? [
-  { label: 'Total students',   value: String(stats.totalStudents),   icon: Users,          color: '#1a6b4a', to: '/admin/students' },
-  { label: 'Attendance latest', value: stats.attendanceToday !== null ? `${stats.attendanceToday}%` : 'No data', icon: ClipboardCheck, color: '#2563eb', to: '/admin/attendance' },
-  { label: 'Fees collected',   value: stats.feesCollectedPct !== null ? `${stats.feesCollectedPct}%` : 'No data', sub: `${stats.overdueCount} overdue`, icon: Receipt, color: '#f59e0b', to: '/admin/fees' },
+  { label: 'Total students',   value: String(stats.totalStudents),   icon: Users,          color: '#007ACC', to: '/admin/students' },
+  { label: 'Attendance latest', value: stats.attendanceToday !== null ? `${stats.attendanceToday}%` : 'No data', icon: ClipboardCheck, color: '#1F9CF0', to: '/admin/attendance' },
+  { label: 'Fees collected',   value: stats.feesCollectedPct !== null ? `${stats.feesCollectedPct}%` : 'No data', sub: `${stats.overdueCount} overdue`, icon: Receipt, color: '#D9A438', to: '/admin/fees' },
   { label: 'Active teachers',  value: String(stats.totalTeachers),   icon: GraduationCap,  color: '#7c3aed', to: '/admin/teachers' },
 ] : []
 
@@ -150,9 +150,9 @@ export default function AdminDashboard() {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
-              { icon: UserPlus,      label: 'Enrol student',     color: '#1a6b4a', to: '/admin/students' },
-              { icon: Megaphone,     label: 'Send announcement', color: '#2563eb', to: '/admin/announcements' },
-              { icon: Receipt,       label: 'Record payment',    color: '#f59e0b', to: '/admin/fees' },
+              { icon: UserPlus,      label: 'Enrol student',     color: '#007ACC', to: '/admin/students' },
+              { icon: Megaphone,     label: 'Send announcement', color: '#1F9CF0', to: '/admin/announcements' },
+              { icon: Receipt,       label: 'Record payment',    color: '#D9A438', to: '/admin/fees' },
               { icon: GraduationCap, label: 'Add teacher',       color: '#7c3aed', to: '/admin/teachers' },
             ].map((a) => {
               const Icon = a.icon

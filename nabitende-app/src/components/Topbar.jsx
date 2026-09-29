@@ -6,10 +6,10 @@ import api from '../api'
 
 const roleConfig = {
   admin:      { color: '#ea580c' },
-  teacher:    { color: '#1a6b4a' },
+  teacher:    { color: '#007ACC' },
   parent:     { color: '#0891b2' },
   student:    { color: '#7c3aed' },
-  government: { color: '#1d4ed8' },
+  government: { color: '#0B1B3F' },
 }
 
 export default function Topbar({ role, onMenuClick }) {
@@ -23,7 +23,7 @@ export default function Topbar({ role, onMenuClick }) {
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
 
   // ✅ FIX 2: color derived from roleConfig inside component
-  const color = roleConfig[role]?.color || '#1a6b4a'
+  const color = roleConfig[role]?.color || '#007ACC'
 
   // ✅ FIX 3: handleLogout defined inside component
   function handleLogout() {

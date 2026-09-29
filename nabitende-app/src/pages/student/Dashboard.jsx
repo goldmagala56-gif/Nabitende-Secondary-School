@@ -42,8 +42,8 @@ export default function StudentDashboard() {
         {[
           { label: 'Classes today',    value: '4',    sub: '2 remaining',     color: '#7c3aed', icon: BookOpen       },
           { label: 'Attendance rate',  value: '91%',  sub: 'this term',       color: '#16a34a', icon: ClipboardCheck },
-          { label: 'Average grade',    value: 'B+',   sub: 'across subjects', color: '#2563eb', icon: TrendingUp     },
-          { label: 'Days to exams',    value: '8',    sub: 'mid-term exams',  color: '#f59e0b', icon: Calendar       },
+          { label: 'Average grade',    value: 'B+',   sub: 'across subjects', color: '#1F9CF0', icon: TrendingUp     },
+          { label: 'Days to exams',    value: '8',    sub: 'mid-term exams',  color: '#D9A438', icon: Calendar       },
         ].map((s) => {
           const Icon = s.icon
           return (
@@ -109,7 +109,7 @@ export default function StudentDashboard() {
           </div>
           <div className="space-y-2">
             {recentGrades.map((g) => {
-              const gradeColor = g.grade === 'A' ? '#16a34a' : g.grade === 'B' ? '#2563eb' : '#f59e0b'
+              const gradeColor = g.grade === 'A' ? '#16a34a' : g.grade === 'B' ? '#1F9CF0' : '#D9A438'
               return (
                 <div key={g.subject}
                   className="flex items-center gap-3 p-3 rounded-lg border border-[var(--color-border)]">

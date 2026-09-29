@@ -5,7 +5,7 @@ import api from '../../api'
 function attendanceColor(pct) {
   if (pct === null || pct === undefined) return '#6b7280'
   if (pct >= 90) return '#16a34a'
-  if (pct >= 75) return '#f59e0b'
+  if (pct >= 75) return '#D9A438'
   return '#dc2626'
 }
 
@@ -20,7 +20,7 @@ function AttendanceBadge({ pct }) {
 }
 
 function GenderBadge({ gender }) {
-  const male   = { bg: '#2563eb12', color: '#2563eb' }
+  const male   = { bg: '#1F9CF012', color: '#1F9CF0' }
   const female = { bg: '#db277712', color: '#db2777' }
   const style  = gender?.toLowerCase() === 'female' ? female : male
   return (
@@ -133,8 +133,8 @@ export default function TeacherClassList() {
         </div>
 
         {/* Count badge */}
-        <div className="px-3 py-2 rounded-lg bg-[#1a6b4a12] border border-[#1a6b4a20]">
-          <span className="text-[13px] font-semibold text-[#1a6b4a]">
+        <div className="px-3 py-2 rounded-lg bg-[#007ACC12] border border-[#007ACC20]">
+          <span className="text-[13px] font-semibold text-school-blue">
             {filtered.length} student{filtered.length !== 1 ? 's' : ''}
           </span>
         </div>
@@ -167,8 +167,8 @@ export default function TeacherClassList() {
 
         {loading ? (
           <div className="py-16 flex items-center justify-center">
-            <div className="w-7 h-7 border-2 border-[#1a6b4a]/20
-              border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-7 h-7 border-2 border-school-blue/20
+              border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : filtered.length === 0 ? (
           <div className="py-16 text-center">
@@ -224,7 +224,7 @@ export default function TeacherClassList() {
                         ) : (
                           <div className="w-9 h-9 rounded-full flex items-center justify-center
                             text-[12px] font-bold text-white"
-                            style={{ background: '#1a6b4a' }}>
+                            style={{ background: '#007ACC' }}>
                             {initials}
                           </div>
                         )}
@@ -299,7 +299,7 @@ export default function TeacherClassList() {
                               {s.subjects.map(sub => (
                                 <span key={sub}
                                   className="text-[11px] px-2 py-0.5 rounded-full
-                                    bg-[#1a6b4a12] text-[#1a6b4a]">
+                                    bg-[#007ACC12] text-school-blue">
                                   {sub}
                                 </span>
                               ))}

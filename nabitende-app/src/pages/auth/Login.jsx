@@ -4,19 +4,19 @@ import { useAuth } from '../../context/AuthContext'
 import { School, Eye, EyeOff, LogIn } from 'lucide-react'
 
 const ROLE_HINTS = [
-  { role: 'School Head', email: 'admin@Nabitende-ss.ug',   color: '#ea580c', bg: '#fff7ed' },
-  { role: 'Teacher',     email: 'teacher@Nabitende-ss.ug', color: '#1a6b4a', bg: '#f0fdf4' },
-  { role: 'Parent',      email: 'parent@Nabitende-ss.ug',  color: '#0891b2', bg: '#ecfeff' },
-  { role: 'Student',     email: 'student@Nabitende-ss.ug', color: '#7c3aed', bg: '#faf5ff' },
-  { role: 'Government',  email: 'gov@Nabitende-ss.ug',     color: '#1d4ed8', bg: '#eff6ff' },
+  { role: 'School Head', email: 'admin@Nabitende SS.ug',   color: '#ea580c', bg: '#fff7ed' },
+  { role: 'Teacher',     email: 'teacher@Nabitende SS.ug', color: '#007ACC', bg: '#f0fdf4' },
+  { role: 'Parent',      email: 'parent@Nabitende SS.ug',  color: '#0891b2', bg: '#ecfeff' },
+  { role: 'Student',     email: 'student@Nabitende SS.ug', color: '#7c3aed', bg: '#faf5ff' },
+  { role: 'Government',  email: 'gov@Nabitende SS.ug',     color: '#0B1B3F', bg: '#eff6ff' },
 ]
 
 const PASSWORD_MAP = {
-  'admin@Nabitende-ss.ug':   'admin123',
-  'teacher@Nabitende-ss.ug': 'teacher123',
-  'parent@Nabitende-ss.ug':  'parent123',
-  'student@Nabitende-ss.ug': 'student123',
-  'gov@Nabitende-ss.ug':     'gov123',
+  'admin@Nabitende SS.ug':   'admin123',
+  'teacher@Nabitende SS.ug': 'teacher123',
+  'parent@Nabitende SS.ug':  'parent123',
+  'student@Nabitende SS.ug': 'student123',
+  'gov@Nabitende SS.ug':     'gov123',
 }
 
 export default function Login() {
@@ -49,7 +49,7 @@ export default function Login() {
 
       {/* ── Left branding panel ── */}
       <div className="hidden lg:flex flex-col w-[400px] min-w-[400px]
-        bg-[#1a6b4a] text-white">
+        bg-school-blue text-white">
 
         {/* Top: logo */}
         <div className="px-8 pt-10 pb-0">
@@ -59,7 +59,7 @@ export default function Login() {
               <School size={20} className="text-white" />
             </div>
             <span className="text-[18px] font-bold tracking-tight">
-              Nabitende-ss
+              Nabitende SS
             </span>
           </div>
         </div>
@@ -125,12 +125,12 @@ export default function Login() {
 
           {/* Mobile logo */}
           <div className="flex items-center gap-3 mb-10 lg:hidden">
-            <div className="w-10 h-10 rounded-xl bg-[#1a6b4a]
+            <div className="w-10 h-10 rounded-xl bg-school-blue
               flex items-center justify-center">
               <School size={20} className="text-white" />
             </div>
             <span className="text-[18px] font-bold text-[var(--color-text)]">
-              Nabitende-ss
+              Nabitende SS
             </span>
           </div>
 
@@ -141,7 +141,7 @@ export default function Login() {
               Welcome back
             </h2>
             <p className="text-[15px] text-[var(--color-text-muted)]">
-              Sign in to your Nabitende-ss account
+              Sign in to your Nabitende SS account
             </p>
           </div>
 
@@ -177,14 +177,14 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="you@Nabitende-ss.ug"
+                placeholder="you@Nabitende SS.ug"
                 required
                 className="w-full px-4 py-3.5 rounded-xl
                   border-2 border-[var(--color-border)]
                   bg-white text-[15px] text-[var(--color-text)]
                   placeholder:text-[var(--color-text-muted)]
-                  focus:outline-none focus:border-[#1a6b4a]
-                  focus:ring-4 focus:ring-[#1a6b4a]/10
+                  focus:outline-none focus:border-school-blue
+                  focus:ring-4 focus:ring-school-blue/10
                   transition-all"
               />
             </div>
@@ -206,8 +206,8 @@ export default function Login() {
                     border-2 border-[var(--color-border)]
                     bg-white text-[15px] text-[var(--color-text)]
                     placeholder:text-[var(--color-text-muted)]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10
                     transition-all"
                 />
                 <button
@@ -237,7 +237,7 @@ export default function Login() {
               disabled={loading}
               className="w-full flex items-center justify-center gap-2.5
                 px-4 py-4 rounded-xl
-                bg-[#1a6b4a] hover:bg-[#15573c] active:bg-[#124a33]
+                bg-school-blue hover:bg-school-blue-hover active:bg-school-blue-active
                 text-white text-[16px] font-semibold
                 transition-all disabled:opacity-60 disabled:cursor-not-allowed
                 shadow-sm hover:shadow-md mt-2"
@@ -254,7 +254,7 @@ export default function Login() {
 
           {/* Footer note */}
           <p className="mt-10 text-center text-[13px] text-[var(--color-text-muted)]">
-            Nabitende-ss · Uganda · Term 2, 2026
+            Nabitende SS · Uganda · Term 2, 2026
           </p>
         </div>
       </div>

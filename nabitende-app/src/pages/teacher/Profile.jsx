@@ -7,15 +7,15 @@ import api from '../../api'
 
 const STATUS_OPTIONS = [
   { value: 'Present',    label: 'Present',    color: '#16a34a' },
-  { value: 'On Leave',   label: 'On Leave',   color: '#f59e0b' },
+  { value: 'On Leave',   label: 'On Leave',   color: '#D9A438' },
   { value: 'Sick',       label: 'Sick',       color: '#dc2626' },
-  { value: 'Training',   label: 'Training',   color: '#2563eb' },
+  { value: 'Training',   label: 'Training',   color: '#1F9CF0' },
   { value: 'Suspended',  label: 'Suspended',  color: '#7c3aed' },
 ]
 
 const REPORT_CATEGORIES = [
   { value: 'general',      label: 'General',      color: '#6b7280' },
-  { value: 'performance',  label: 'Performance',  color: '#2563eb' },
+  { value: 'performance',  label: 'Performance',  color: '#1F9CF0' },
   { value: 'incident',     label: 'Incident',     color: '#dc2626' },
   { value: 'commendation', label: 'Commendation', color: '#16a34a' },
 ]
@@ -175,14 +175,14 @@ export default function TeacherProfile() {
             ) : (
               <div className="w-20 h-20 rounded-full flex items-center justify-center
                 text-[22px] font-bold text-white"
-                style={{ background: '#1a6b4a' }}>
+                style={{ background: '#007ACC' }}>
                 {initials}
               </div>
             )}
             {editing && (
               <button
                 onClick={() => fileRef.current?.click()}
-                className="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-[#1a6b4a]
+                className="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-school-blue
                   flex items-center justify-center border-2 border-[var(--color-surface)]">
                 <Camera size={13} className="text-white" />
               </button>
@@ -281,7 +281,7 @@ export default function TeacherProfile() {
               ) : (
                 (teacher.classes || []).map(c => (
                   <span key={c} className="text-[12px] px-2 py-0.5 rounded-full
-                    bg-[#1a6b4a18] text-[#1a6b4a] font-medium">
+                    bg-[#007ACC18] text-school-blue font-medium">
                     {c}
                   </span>
                 ))
@@ -299,7 +299,7 @@ export default function TeacherProfile() {
               <div className="mt-1 flex flex-wrap gap-2">
                 {teacher.staff_roles.map(r => (
                   <span key={r} className="text-[12px] px-2 py-0.5 rounded-full
-                    bg-[#2563eb18] text-[#2563eb] font-medium">
+                    bg-[#1F9CF018] text-school-sky font-medium">
                     {r}
                   </span>
                 ))}
@@ -352,7 +352,7 @@ export default function TeacherProfile() {
                 ) : (
                   teacher.achievements.map((a, i) => (
                     <li key={i} className="flex items-start gap-2 text-[13px] text-[var(--color-text)]">
-                      <Award size={13} className="mt-0.5 flex-shrink-0" style={{ color: '#f59e0b' }} />
+                      <Award size={13} className="mt-0.5 flex-shrink-0" style={{ color: '#D9A438' }} />
                       {a}
                     </li>
                   ))
@@ -372,7 +372,7 @@ export default function TeacherProfile() {
               <button onClick={saveProfile} disabled={saving}
                 className="flex-1 py-2 rounded-lg text-white text-[13px] font-medium
                   flex items-center justify-center gap-2"
-                style={{ background: '#1a6b4a', opacity: saving ? 0.7 : 1 }}>
+                style={{ background: '#007ACC', opacity: saving ? 0.7 : 1 }}>
                 <Save size={13} />
                 {saving ? 'Saving…' : 'Save Profile'}
               </button>
@@ -452,7 +452,7 @@ export default function TeacherProfile() {
               </button>
               <button onClick={saveStatus} disabled={saving}
                 className="flex-1 py-2 rounded-lg text-white text-[13px] font-medium"
-                style={{ background: '#1a6b4a', opacity: saving ? 0.7 : 1 }}>
+                style={{ background: '#007ACC', opacity: saving ? 0.7 : 1 }}>
                 {saving ? 'Saving…' : 'Update Status'}
               </button>
             </div>
@@ -490,7 +490,7 @@ export default function TeacherProfile() {
 
         {reportsLoading ? (
           <div className="flex justify-center py-6">
-            <div className="w-6 h-6 border-2 border-[#1a6b4a]/20 border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-school-blue/20 border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : reports.length === 0 ? (
           <p className="text-[13px] text-[var(--color-text-muted)]">No reports have been written about you yet.</p>

@@ -7,16 +7,16 @@ import api from '../../api'
 
 function statusColor(status) {
   if (status === 'marked')    return '#16a34a'
-  if (status === 'submitted') return '#2563eb'
-  return '#f59e0b'
+  if (status === 'submitted') return '#1F9CF0'
+  return '#D9A438'
 }
 
 function dueBadge(due) {
   const diff = new Date(due) - new Date()
   const days = Math.ceil(diff / 86400000)
   if (days < 0)  return { label: 'Overdue',       color: '#dc2626' }
-  if (days === 0) return { label: 'Due today',     color: '#f59e0b' }
-  if (days <= 3)  return { label: `${days}d left`, color: '#f59e0b' }
+  if (days === 0) return { label: 'Due today',     color: '#D9A438' }
+  if (days <= 3)  return { label: `${days}d left`, color: '#D9A438' }
   return              { label: `${days}d left`,    color: '#16a34a' }
 }
 
@@ -151,7 +151,7 @@ export default function TeacherAssignments() {
         <button
           onClick={() => { setShowCreate(true); setError('') }}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-[13px] font-medium"
-          style={{ background: '#1a6b4a' }}>
+          style={{ background: '#007ACC' }}>
           <Plus size={15} /> New Assignment
         </button>
       </div>
@@ -267,7 +267,7 @@ export default function TeacherAssignments() {
                 onClick={createAssignment}
                 disabled={saving}
                 className="flex-1 py-2 rounded-lg text-white text-[13px] font-medium"
-                style={{ background: '#1a6b4a', opacity: saving ? 0.7 : 1 }}>
+                style={{ background: '#007ACC', opacity: saving ? 0.7 : 1 }}>
                 {saving ? 'Creating…' : 'Create Assignment'}
               </button>
             </div>
@@ -372,7 +372,7 @@ export default function TeacherAssignments() {
                 onClick={() => saveEdit(editingId)}
                 disabled={saving}
                 className="flex-1 py-2 rounded-lg text-white text-[13px] font-medium"
-                style={{ background: '#1a6b4a', opacity: saving ? 0.7 : 1 }}>
+                style={{ background: '#007ACC', opacity: saving ? 0.7 : 1 }}>
                 {saving ? 'Saving…' : 'Save Changes'}
               </button>
             </div>
@@ -443,7 +443,7 @@ export default function TeacherAssignments() {
                                 <div className="h-1.5 rounded-full transition-all"
                                   style={{
                                     width: total ? `${(submitted / total) * 100}%` : '0%',
-                                    background: '#1a6b4a'
+                                    background: '#007ACC'
                                   }} />
                               </div>
                               <span className="text-[11px] text-[var(--color-text-muted)] whitespace-nowrap">
@@ -532,7 +532,7 @@ export default function TeacherAssignments() {
                                         {s.file_url && (
                                           <a href={s.file_url} target="_blank" rel="noreferrer"
                                             className="inline-flex items-center gap-1 mt-2 text-[12px]
-                                              text-[#2563eb] hover:underline">
+                                              text-school-sky hover:underline">
                                             <Download size={12} /> {s.file_name || 'Download file'}
                                           </a>
                                         )}
@@ -568,7 +568,7 @@ export default function TeacherAssignments() {
                                               onClick={() => saveMark(a.id, s.student_id)}
                                               disabled={saving}
                                               className="px-3 py-1.5 rounded text-white text-[12px]"
-                                              style={{ background: '#1a6b4a' }}>
+                                              style={{ background: '#007ACC' }}>
                                               Save
                                             </button>
                                             <button onClick={() => setMarkingId(null)}
@@ -595,7 +595,7 @@ export default function TeacherAssignments() {
                                                 setMarkingId(s.id)
                                                 setMarkForm({ marks: s.marks || '', feedback: s.feedback || '' })
                                               }}
-                                              className="text-[12px] text-[#2563eb] hover:underline">
+                                              className="text-[12px] text-school-sky hover:underline">
                                               {s.marks !== null ? 'Edit mark' : 'Mark'}
                                             </button>
                                           </div>

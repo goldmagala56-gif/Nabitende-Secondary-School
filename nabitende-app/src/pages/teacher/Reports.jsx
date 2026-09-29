@@ -6,7 +6,7 @@ import SectionCard from '../../components/SectionCard'
 
 const REPORT_CATEGORIES = [
   { value: 'general',      label: 'General',      color: '#6b7280' },
-  { value: 'performance',  label: 'Performance',  color: '#2563eb' },
+  { value: 'performance',  label: 'Performance',  color: '#1F9CF0' },
   { value: 'incident',     label: 'Incident',     color: '#dc2626' },
   { value: 'commendation', label: 'Commendation', color: '#16a34a' },
 ]
@@ -111,7 +111,7 @@ export default function TeacherReports() {
         <button onClick={() => setTab('received')}
           className={`px-4 py-2 rounded-lg text-[13px] font-semibold transition-colors ${
             tab === 'received'
-              ? 'bg-[#1a6b4a] text-white'
+              ? 'bg-school-blue text-white'
               : 'text-[var(--color-text-muted)] hover:bg-[var(--color-bg)]'
           }`}>
           From Admin
@@ -119,7 +119,7 @@ export default function TeacherReports() {
         <button onClick={() => setTab('submitted')}
           className={`px-4 py-2 rounded-lg text-[13px] font-semibold transition-colors ${
             tab === 'submitted'
-              ? 'bg-[#1a6b4a] text-white'
+              ? 'bg-school-blue text-white'
               : 'text-[var(--color-text-muted)] hover:bg-[var(--color-bg)]'
           }`}>
           My Submissions
@@ -133,7 +133,7 @@ export default function TeacherReports() {
             <button onClick={() => setFilter('all')}
               className={`px-3.5 py-2 rounded-full text-[12px] font-semibold border transition-all ${
                 filter === 'all'
-                  ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                  ? 'bg-school-blue text-white border-school-blue'
                   : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-bg)]'
               }`}>
               All ({received.length})
@@ -155,8 +155,8 @@ export default function TeacherReports() {
           <SectionCard title="Reports" noPadding>
             {receivedLoading ? (
               <div className="flex items-center justify-center py-16">
-                <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-                  border-t-[#1a6b4a] rounded-full animate-spin" />
+                <div className="w-8 h-8 border-2 border-school-blue/20
+                  border-t-school-blue rounded-full animate-spin" />
               </div>
             ) : visibleReceived.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16 gap-3">
@@ -206,7 +206,7 @@ export default function TeacherReports() {
           <div className="flex justify-end">
             <button onClick={() => setShowForm(true)}
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl
-                bg-[#1a6b4a] hover:bg-[#15573c] text-white text-[13px]
+                bg-school-blue hover:bg-school-blue-hover text-white text-[13px]
                 font-semibold transition-colors">
               <Plus size={15} />
               New report
@@ -216,8 +216,8 @@ export default function TeacherReports() {
           <SectionCard title="Submitted reports" noPadding>
             {submittedLoading ? (
               <div className="flex items-center justify-center py-16">
-                <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-                  border-t-[#1a6b4a] rounded-full animate-spin" />
+                <div className="w-8 h-8 border-2 border-school-blue/20
+                  border-t-school-blue rounded-full animate-spin" />
               </div>
             ) : submitted.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16 gap-3">
@@ -233,7 +233,7 @@ export default function TeacherReports() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap mb-1.5">
                         <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full
-                          bg-[#1a6b4a]/10 text-[#1a6b4a]">
+                          bg-school-blue/10 text-school-blue">
                           {s.report_type}
                         </span>
                         <span className="text-[11px] text-[var(--color-text-muted)]">
@@ -293,7 +293,7 @@ export default function TeacherReports() {
                   onChange={e => setForm(f => ({ ...f, report_type: e.target.value }))}
                   placeholder="e.g. Term Report, Incident Report..."
                   className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)]
-                    bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                    bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
                 <datalist id="report-type-suggestions">
                   {SUGGESTED_REPORT_TYPES.map(t => <option key={t} value={t} />)}
                 </datalist>
@@ -303,7 +303,7 @@ export default function TeacherReports() {
                       onClick={() => setForm(f => ({ ...f, report_type: t }))}
                       className="px-2.5 py-1 rounded-full text-[11px] font-medium
                         border border-[var(--color-border)] text-[var(--color-text-muted)]
-                        hover:border-[#1a6b4a] hover:text-[#1a6b4a] transition-all">
+                        hover:border-school-blue hover:text-school-blue transition-all">
                       {t}
                     </button>
                   ))}
@@ -318,7 +318,7 @@ export default function TeacherReports() {
                   onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
                   placeholder="e.g. Term 2 syllabus coverage — Mathematics S.3A"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)]
-                    bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                    bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
               </div>
 
               <div>
@@ -337,7 +337,7 @@ export default function TeacherReports() {
                   placeholder="Write the details of your report..."
                   maxLength={MAX_BODY_LENGTH}
                   className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)]
-                    bg-white text-[14px] resize-none focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                    bg-white text-[14px] resize-none focus:outline-none focus:border-school-blue transition-all" />
               </div>
 
               <div className="flex gap-3">
@@ -348,7 +348,7 @@ export default function TeacherReports() {
                 </button>
                 <button type="submit" disabled={saving}
                   className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl
-                    bg-[#1a6b4a] hover:bg-[#15573c] text-white text-[13px] font-semibold
+                    bg-school-blue hover:bg-school-blue-hover text-white text-[13px] font-semibold
                     disabled:opacity-60">
                   <Send size={14} />
                   {saving ? 'Submitting...' : 'Submit report'}

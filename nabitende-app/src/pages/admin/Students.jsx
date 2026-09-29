@@ -124,7 +124,7 @@ export default function AdminStudents() {
         <button
           onClick={() => setShowForm(s => !s)}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl
-            bg-[#1a6b4a] hover:bg-[#15573c] text-white text-[13px]
+            bg-school-blue hover:bg-school-blue-hover text-white text-[13px]
             font-semibold transition-colors">
           <UserPlus size={16} />
           Enrol student
@@ -134,10 +134,10 @@ export default function AdminStudents() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <StatCard label="Total students" value={students.length}                               color="#1a6b4a" icon={Users} sub="enrolled this term"  />
-        <StatCard label="Male"           value={students.filter(s => s.gender === 'Male').length}   color="#2563eb" icon={Users} sub="male students"       />
+        <StatCard label="Total students" value={students.length}                               color="#007ACC" icon={Users} sub="enrolled this term"  />
+        <StatCard label="Male"           value={students.filter(s => s.gender === 'Male').length}   color="#1F9CF0" icon={Users} sub="male students"       />
         <StatCard label="Female"         value={students.filter(s => s.gender === 'Female').length} color="#7c3aed" icon={Users} sub="female students"     />
-        <StatCard label="Classes"        value={classes.length}                                color="#f59e0b" icon={Users} sub="active streams"      />
+        <StatCard label="Classes"        value={classes.length}                                color="#D9A438" icon={Users} sub="active streams"      />
       </div>
 
       {/* Class manager */}
@@ -146,13 +146,13 @@ export default function AdminStudents() {
           {classes.map(cls => (
             <div key={cls}
               className="flex items-center gap-1.5 px-3 py-1.5
-                rounded-full bg-[#1a6b4a]/10 border border-[#1a6b4a]/20">
-              <span className="text-[12px] font-semibold text-[#1a6b4a]">
+                rounded-full bg-school-blue/10 border border-school-blue/20">
+              <span className="text-[12px] font-semibold text-school-blue">
                 {cls}
               </span>
               <button
                 onClick={() => handleRemoveClass(cls)}
-                className="text-[#1a6b4a]/50 hover:text-red-500
+                className="text-school-blue/50 hover:text-red-500
                   transition-colors">
                 <X size={12} />
               </button>
@@ -176,13 +176,13 @@ export default function AdminStudents() {
               placeholder="e.g. S.1A or S.5 Science"
               className="flex-1 px-3.5 py-2 rounded-xl border-2
                 border-[var(--color-border)] bg-white text-[13px]
-                focus:outline-none focus:border-[#1a6b4a] transition-all"
+                focus:outline-none focus:border-school-blue transition-all"
               autoFocus
             />
             <button onClick={handleAddClass}
-              className="px-4 py-2 rounded-xl bg-[#1a6b4a]
+              className="px-4 py-2 rounded-xl bg-school-blue
                 text-white text-[13px] font-semibold
-                hover:bg-[#15573c] transition-colors">
+                hover:bg-school-blue-hover transition-colors">
               Add
             </button>
             <button onClick={() => setShowAddClass(false)}
@@ -197,9 +197,9 @@ export default function AdminStudents() {
           <button
             onClick={() => setShowAddClass(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-xl
-              border-2 border-dashed border-[#1a6b4a]/30
-              text-[#1a6b4a] text-[13px] font-semibold
-              hover:border-[#1a6b4a] hover:bg-[#1a6b4a]/5
+              border-2 border-dashed border-school-blue/30
+              text-school-blue text-[13px] font-semibold
+              hover:border-school-blue hover:bg-school-blue/5
               transition-all mt-1">
             <Plus size={15} />
             Add class stream
@@ -222,8 +222,8 @@ export default function AdminStudents() {
                   placeholder="e.g. David Ssemanda"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
               <div>
@@ -235,8 +235,8 @@ export default function AdminStudents() {
                   placeholder="e.g. SMC/2026/0001"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
               <div>
@@ -249,7 +249,7 @@ export default function AdminStudents() {
                       className="w-full appearance-none px-3.5 py-2.5
                         rounded-xl border-2 border-[var(--color-border)]
                         bg-white text-[14px]
-                        focus:outline-none focus:border-[#1a6b4a]
+                        focus:outline-none focus:border-school-blue
                         transition-all">
                       <option value="">Select class...</option>
                       {classes.map(c => (
@@ -264,8 +264,8 @@ export default function AdminStudents() {
                   <button type="button"
                     onClick={() => setShowAddClass(true)}
                     className="px-3 py-2.5 rounded-xl border-2
-                      border-[var(--color-border)] text-[#1a6b4a]
-                      hover:bg-[#1a6b4a]/5 transition-colors"
+                      border-[var(--color-border)] text-school-blue
+                      hover:bg-school-blue/5 transition-colors"
                     title="Add new class">
                     <Plus size={16} />
                   </button>
@@ -281,7 +281,7 @@ export default function AdminStudents() {
                     className="w-full appearance-none px-3.5 py-2.5
                       rounded-xl border-2 border-[var(--color-border)]
                       bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
+                      focus:outline-none focus:border-school-blue
                       transition-all">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -301,7 +301,7 @@ export default function AdminStudents() {
                   onChange={e => setForm(f => ({ ...f, date_of_birth: e.target.value }))}
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
+                    focus:outline-none focus:border-school-blue
                     transition-all" />
               </div>
 
@@ -315,8 +315,8 @@ export default function AdminStudents() {
                 Cancel
               </button>
               <button type="submit" disabled={saving}
-                className="px-5 py-2.5 rounded-xl bg-[#1a6b4a]
-                  hover:bg-[#15573c] text-white text-[13px]
+                className="px-5 py-2.5 rounded-xl bg-school-blue
+                  hover:bg-school-blue-hover text-white text-[13px]
                   font-semibold transition-colors
                   disabled:opacity-60 disabled:cursor-not-allowed">
                 {saving ? 'Saving...' : 'Enrol student'}
@@ -337,8 +337,8 @@ export default function AdminStudents() {
             placeholder="Search by name or admission number..."
             className="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 margin-top-5
               border-[var(--color-border)] bg-white  text-[14px]
-              focus:outline-none focus:border-[#1a6b4a]
-              focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+              focus:outline-none focus:border-school-blue
+              focus:ring-4 focus:ring-school-blue/10 transition-all" />
         </div>
         <div className="flex gap-2 flex-wrap">
           <button
@@ -346,7 +346,7 @@ export default function AdminStudents() {
             className={`px-3 py-1.5 rounded-full text-[12px]
               font-semibold border-2 transition-colors ${
               filterClass === 'All'
-                ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                ? 'bg-school-blue text-white border-school-blue'
                 : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
               }`}>
             All
@@ -357,7 +357,7 @@ export default function AdminStudents() {
               className={`px-3 py-1.5 rounded-full text-[12px]
                 font-semibold border-2 transition-colors ${
                 filterClass === c
-                  ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                  ? 'bg-school-blue text-white border-school-blue'
                   : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
                 }`}>
               {c}
@@ -385,8 +385,8 @@ export default function AdminStudents() {
       <SectionCard title={`${filtered.length} students`} noPadding>
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-              border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-school-blue/20
+              border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : error ? (
           <div className="p-6 text-center text-red-600 text-[13px]">
@@ -419,7 +419,7 @@ export default function AdminStudents() {
                     <td className="px-4 py-3 text-[12px]
                       text-[var(--color-text-muted)]">{i + 1}</td>
                     <td className="px-4 py-3 text-[13px] font-semibold text-[var(--color-text)] cursor-pointer
-                      hover:text-[#1a6b4a] transition-colors"
+                      hover:text-school-blue transition-colors"
                       onClick={() => navigate(`/admin/students/${s.id}`)}>
                       {s.full_name}
                     </td>
@@ -430,7 +430,7 @@ export default function AdminStudents() {
                     <td className="px-4 py-3">
                       <span className="text-[11px] font-semibold
                         px-2.5 py-1 rounded-full
-                        bg-[#1a6b4a]/10 text-[#1a6b4a]">
+                        bg-school-blue/10 text-school-blue">
                         {s.class_name}
                       </span>
                     </td>

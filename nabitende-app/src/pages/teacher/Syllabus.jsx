@@ -7,13 +7,13 @@ import api from '../../api'
 
 const STATUS_OPTIONS = [
   { value: 'not_started', label: 'Not Started', color: '#6b7280' },
-  { value: 'in_progress', label: 'In Progress', color: '#f59e0b' },
+  { value: 'in_progress', label: 'In Progress', color: '#D9A438' },
   { value: 'done',        label: 'Done',         color: '#16a34a' },
 ]
 
 function StatusIcon({ status }) {
   if (status === 'done')        return <CheckCircle size={16} style={{ color: '#16a34a' }} />
-  if (status === 'in_progress') return <Clock       size={16} style={{ color: '#f59e0b' }} />
+  if (status === 'in_progress') return <Clock       size={16} style={{ color: '#D9A438' }} />
   return                               <Circle      size={16} style={{ color: '#6b7280' }} />
 }
 
@@ -195,7 +195,7 @@ export default function TeacherSyllabus() {
         <button
           onClick={() => { setShowAdd(true); setError('') }}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-[13px] font-medium"
-          style={{ background: '#1a6b4a' }}>
+          style={{ background: '#007ACC' }}>
           <Plus size={15} /> Add Topic
         </button>
       </div>
@@ -243,7 +243,7 @@ export default function TeacherSyllabus() {
               Term Progress
             </h2>
             <button onClick={() => setShowTarget(t => !t)}
-              className="flex items-center gap-1.5 text-[12px] text-[#1a6b4a]">
+              className="flex items-center gap-1.5 text-[12px] text-school-blue">
               <Target size={13} />
               {target > 0 ? `Target: ${target} topics` : 'Set target'}
             </button>
@@ -259,7 +259,7 @@ export default function TeacherSyllabus() {
                 placeholder="e.g. 20" />
               <button onClick={saveTarget} disabled={saving}
                 className="px-3 py-1.5 rounded-lg text-white text-[12px]"
-                style={{ background: '#1a6b4a' }}>
+                style={{ background: '#007ACC' }}>
                 {saving ? 'Saving…' : 'Save'}
               </button>
               <button onClick={() => setShowTarget(false)}
@@ -277,13 +277,13 @@ export default function TeacherSyllabus() {
                 <span className="text-[12px] text-[var(--color-text-muted)]">
                   {summary.done || 0} of {target} topics done
                 </span>
-                <span className="text-[12px] font-semibold" style={{ color: '#1a6b4a' }}>
+                <span className="text-[12px] font-semibold" style={{ color: '#007ACC' }}>
                   {pct}%
                 </span>
               </div>
               <div className="h-2 rounded-full bg-[var(--color-border)]">
                 <div className="h-2 rounded-full transition-all"
-                  style={{ width: `${pct}%`, background: '#1a6b4a' }} />
+                  style={{ width: `${pct}%`, background: '#007ACC' }} />
               </div>
             </div>
           )}
@@ -292,7 +292,7 @@ export default function TeacherSyllabus() {
           <div className="grid grid-cols-3 gap-3">
             {[
               { label: 'Done',        value: summary.done        || 0, color: '#16a34a' },
-              { label: 'In Progress', value: summary.in_progress || 0, color: '#f59e0b' },
+              { label: 'In Progress', value: summary.in_progress || 0, color: '#D9A438' },
               { label: 'Not Started', value: summary.not_started || 0, color: '#6b7280' },
             ].map(s => (
               <div key={s.label} className="text-center p-3 rounded-lg border
@@ -355,7 +355,7 @@ export default function TeacherSyllabus() {
               </button>
               <button onClick={addTopic} disabled={saving}
                 className="flex-1 py-2 rounded-lg text-white text-[13px] font-medium"
-                style={{ background: '#1a6b4a', opacity: saving ? 0.7 : 1 }}>
+                style={{ background: '#007ACC', opacity: saving ? 0.7 : 1 }}>
                 {saving ? 'Adding…' : 'Add Topic'}
               </button>
             </div>
@@ -378,8 +378,8 @@ export default function TeacherSyllabus() {
 
         {loading ? (
           <div className="py-16 flex items-center justify-center">
-            <div className="w-7 h-7 border-2 border-[#1a6b4a]/20
-              border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-7 h-7 border-2 border-school-blue/20
+              border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : topics.length === 0 ? (
           <div className="py-14 text-center">
@@ -459,7 +459,7 @@ export default function TeacherSyllabus() {
                         <button onClick={saveTopic} disabled={saving}
                           className="flex-1 py-2 rounded-lg text-white text-[13px] font-medium
                             flex items-center justify-center gap-1"
-                          style={{ background: '#1a6b4a', opacity: saving ? 0.7 : 1 }}>
+                          style={{ background: '#007ACC', opacity: saving ? 0.7 : 1 }}>
                           <Save size={13} />
                           {saving ? 'Saving…' : 'Save'}
                         </button>
@@ -511,7 +511,7 @@ export default function TeacherSyllabus() {
                           {t.subtopics?.length > 0 && (
                             <button
                               onClick={() => setExpanded(isExpanded ? null : t.id)}
-                              className="flex items-center gap-1 mt-1.5 text-[12px] text-[#1a6b4a]">
+                              className="flex items-center gap-1 mt-1.5 text-[12px] text-school-blue">
                               {isExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
                               {t.subtopics.length} subtopic{t.subtopics.length !== 1 ? 's' : ''}
                             </button>

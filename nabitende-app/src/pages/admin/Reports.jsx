@@ -64,7 +64,7 @@ export default function AdminReports() {
       )
     )
     const base = api.defaults.baseURL?.replace(/\/$/, '') || ''
-    const token = localStorage.getItem('Nabitende-ss_token')
+    const token = localStorage.getItem('Nabitende SS_token')
     // Use a temporary link so the browser handles the download + auth header via fetch
     fetch(`${base}/reports/run/${selectedType.id}/csv?${params.toString()}`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},

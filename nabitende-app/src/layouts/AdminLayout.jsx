@@ -49,10 +49,10 @@ const bottomNavConfig = {
 
 const roleColors = {
   admin:      '#ea580c',
-  teacher:    '#1a6b4a',
+  teacher:    '#007ACC',
   parent:     '#0891b2',
   student:    '#7c3aed',
-  government: '#1d4ed8',
+  government: '#0B1B3F',
 }
 
 export default function AdminLayout({ role }) {
@@ -60,7 +60,7 @@ export default function AdminLayout({ role }) {
   const navigate  = useNavigate()
   const location  = useLocation()
   const bottomNav = bottomNavConfig[role] || bottomNavConfig.admin
-  const color     = roleColors[role] || '#1a6b4a'
+  const color     = roleColors[role] || '#007ACC'
 
   return (
     <div className="flex h-screen overflow-hidden bg-[var(--color-bg)]">

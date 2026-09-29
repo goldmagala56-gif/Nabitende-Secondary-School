@@ -45,8 +45,8 @@ export default function Announcements({ role }) {
       <SectionCard noPadding>
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="w-6 h-6 border-2 border-[#1a6b4a]/20
-              border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-school-blue/20
+              border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : items.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 gap-3">
@@ -69,7 +69,7 @@ export default function Announcements({ role }) {
                 <div key={a.id} className="px-4 py-4">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     {a.pinned && (
-                      <Pin size={13} className="text-[#1a6b4a] flex-shrink-0" />
+                      <Pin size={13} className="text-school-blue flex-shrink-0" />
                     )}
                     <h3 className="text-[14px] font-semibold text-[var(--color-text)]">
                       {a.title}

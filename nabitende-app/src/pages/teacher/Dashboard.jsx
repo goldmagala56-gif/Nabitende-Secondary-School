@@ -100,9 +100,9 @@ export default function TeacherDashboard() {
   }
 
   const statCards = stats ? [
-    { label: 'My classes',      value: String(stats.classCount),   sub: '',                          color: '#1a6b4a', icon: BookOpen },
-    { label: 'Students taught', value: String(stats.totalStudents), sub: 'across all classes',       color: '#2563eb', icon: Users },
-    { label: 'Attendance marked', value: `${stats.classesMarked}/${stats.classCount}`, sub: stats.latestDate ? `as of ${new Date(stats.latestDate).toLocaleDateString()}` : 'no records yet', color: '#f59e0b', icon: ClipboardCheck },
+    { label: 'My classes',      value: String(stats.classCount),   sub: '',                          color: '#007ACC', icon: BookOpen },
+    { label: 'Students taught', value: String(stats.totalStudents), sub: 'across all classes',       color: '#1F9CF0', icon: Users },
+    { label: 'Attendance marked', value: `${stats.classesMarked}/${stats.classCount}`, sub: stats.latestDate ? `as of ${new Date(stats.latestDate).toLocaleDateString()}` : 'no records yet', color: '#D9A438', icon: ClipboardCheck },
     { label: 'Unread messages', value: String(stats.unreadCount),  sub: 'need reply',               color: '#7c3aed', icon: MessageSquare },
   ] : []
 
@@ -204,8 +204,8 @@ export default function TeacherDashboard() {
                       onClick={() => navigate('/teacher/messages')}
                       className="flex items-start gap-3 p-3 rounded-lg hover:bg-[var(--color-bg)]
                         cursor-pointer transition-colors">
-                      <div className="w-8 h-8 rounded-full bg-[#1a6b4a]/10 flex items-center
-                        justify-center text-[11px] font-semibold text-[#1a6b4a] flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-school-blue/10 flex items-center
+                        justify-center text-[11px] font-semibold text-school-blue flex-shrink-0">
                         {m.from_name?.[0]}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -222,7 +222,7 @@ export default function TeacherDashboard() {
                         </p>
                       </div>
                       {!m.is_read && (
-                        <div className="w-2 h-2 rounded-full bg-[#1a6b4a] flex-shrink-0 mt-1.5" />
+                        <div className="w-2 h-2 rounded-full bg-school-blue flex-shrink-0 mt-1.5" />
                       )}
                     </div>
                   ))}
@@ -251,7 +251,7 @@ export default function TeacherDashboard() {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {attendanceSummary.map((a) => {
                   const pct = Math.round((a.present / a.total) * 100)
-                  const color = pct >= 90 ? '#16a34a' : pct >= 75 ? '#f59e0b' : '#dc2626'
+                  const color = pct >= 90 ? '#16a34a' : pct >= 75 ? '#D9A438' : '#dc2626'
                   return (
                     <div key={a.class}
                       className="p-4 rounded-lg border border-[var(--color-border)] text-center">

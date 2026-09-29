@@ -6,8 +6,8 @@ function dueBadge(due) {
   const diff = new Date(due) - new Date()
   const days = Math.ceil(diff / 86400000)
   if (days < 0)   return { label: 'Overdue',       color: '#dc2626' }
-  if (days === 0) return { label: 'Due today',     color: '#f59e0b' }
-  if (days <= 3)  return { label: `${days}d left`, color: '#f59e0b' }
+  if (days === 0) return { label: 'Due today',     color: '#D9A438' }
+  if (days <= 3)  return { label: `${days}d left`, color: '#D9A438' }
   return               { label: `${days}d left`,   color: '#16a34a' }
 }
 
@@ -120,7 +120,7 @@ export default function StudentAssignments() {
                         <button
                           onClick={() => { setOpenId(isOpen ? null : a.id); setError('') }}
                           className="px-3 py-1.5 rounded-lg text-white text-[12px] font-medium flex-shrink-0"
-                          style={{ background: '#1a6b4a' }}>
+                          style={{ background: '#007ACC' }}>
                           {isOpen ? 'Cancel' : 'Submit'}
                         </button>
                       </div>
@@ -173,7 +173,7 @@ export default function StudentAssignments() {
                             onClick={() => submit(a.id)}
                             disabled={submitting === a.id}
                             className="w-full py-2 rounded-lg text-white text-[13px] font-medium"
-                            style={{ background: '#1a6b4a', opacity: submitting === a.id ? 0.7 : 1 }}>
+                            style={{ background: '#007ACC', opacity: submitting === a.id ? 0.7 : 1 }}>
                             {submitting === a.id ? 'Submitting…' : 'Submit Assignment'}
                           </button>
                         </div>
@@ -211,8 +211,8 @@ export default function StudentAssignments() {
                     </div>
                     <span className="text-[11px] px-2 py-0.5 rounded-full flex-shrink-0"
                       style={{
-                        background: a.marks !== null ? '#16a34a18' : '#2563eb18',
-                        color:      a.marks !== null ? '#16a34a'   : '#2563eb'
+                        background: a.marks !== null ? '#16a34a18' : '#1F9CF018',
+                        color:      a.marks !== null ? '#16a34a'   : '#1F9CF0'
                       }}>
                       {a.marks !== null ? 'Marked' : 'Submitted'}
                     </span>

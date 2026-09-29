@@ -160,7 +160,7 @@ export default function AdminMessages() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl
                   text-[13px] font-semibold border-2 transition-colors ${
                   tab === t.key
-                    ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                    ? 'bg-school-blue text-white border-school-blue'
                     : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
                   }`}>
                 <Icon size={15} />
@@ -192,7 +192,7 @@ export default function AdminMessages() {
             selected={selected}
             thread={thread}
             threadLoading={threadLoading}
-            accentColor="#1a6b4a"
+            accentColor="#007ACC"
             myRole="admin"
             users={users}
             onReply={async (body) => {
@@ -219,8 +219,8 @@ export default function AdminMessages() {
             <SectionCard title="Conversations" noPadding>
               {loading ? (
                 <div className="flex items-center justify-center py-12">
-                  <div className="w-6 h-6 border-2 border-[#1a6b4a]/20
-                    border-t-[#1a6b4a] rounded-full animate-spin" />
+                  <div className="w-6 h-6 border-2 border-school-blue/20
+                    border-t-school-blue rounded-full animate-spin" />
                 </div>
               ) : convList.length === 0 ? (
                 <div className="p-8 text-center text-[13px]
@@ -262,7 +262,7 @@ export default function AdminMessages() {
                           </p>
                         </div>
                         {msg.unread > 0 && (
-                          <span className="bg-[#1a6b4a] text-white text-[10px]
+                          <span className="bg-school-blue text-white text-[10px]
                             font-bold w-5 h-5 rounded-full flex items-center
                             justify-center flex-shrink-0">
                             {msg.unread}
@@ -292,7 +292,7 @@ export default function AdminMessages() {
                       className="w-full appearance-none px-3.5 py-2.5
                         rounded-xl border-2 border-[var(--color-border)]
                         bg-white text-[14px] focus:outline-none
-                        focus:border-[#1a6b4a] transition-all">
+                        focus:border-school-blue transition-all">
                       <option value="">Select recipient...</option>
                       {users.map(u => (
                         <option key={u.id} value={u.id}>
@@ -317,8 +317,8 @@ export default function AdminMessages() {
                     placeholder="e.g. Meeting tomorrow"
                     className="w-full px-3.5 py-2.5 rounded-xl border-2
                       border-[var(--color-border)] bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
-                      focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                      focus:outline-none focus:border-school-blue
+                      focus:ring-4 focus:ring-school-blue/10 transition-all" />
                 </div>
 
                 <div>
@@ -332,15 +332,15 @@ export default function AdminMessages() {
                     placeholder="Write your message here..."
                     className="w-full px-3.5 py-2.5 rounded-xl border-2
                       border-[var(--color-border)] bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
-                      focus:ring-4 focus:ring-[#1a6b4a]/10
+                      focus:outline-none focus:border-school-blue
+                      focus:ring-4 focus:ring-school-blue/10
                       transition-all resize-none" />
                 </div>
 
                 <div className="flex justify-end">
                   <button type="submit" disabled={composing}
                     className="flex items-center gap-2 px-6 py-2.5
-                      rounded-xl bg-[#1a6b4a] hover:bg-[#15573c]
+                      rounded-xl bg-school-blue hover:bg-school-blue-hover
                       text-white text-[14px] font-semibold
                       transition-colors disabled:opacity-60">
                     <Send size={16} />
@@ -412,8 +412,8 @@ export default function AdminMessages() {
                     placeholder="e.g. Term 2 fee deadline reminder"
                     className="w-full px-3.5 py-2.5 rounded-xl border-2
                       border-[var(--color-border)] bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
-                      focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                      focus:outline-none focus:border-school-blue
+                      focus:ring-4 focus:ring-school-blue/10 transition-all" />
                 </div>
 
                 <div>
@@ -427,8 +427,8 @@ export default function AdminMessages() {
                     placeholder="Write your broadcast message here..."
                     className="w-full px-3.5 py-2.5 rounded-xl border-2
                       border-[var(--color-border)] bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
-                      focus:ring-4 focus:ring-[#1a6b4a]/10
+                      focus:outline-none focus:border-school-blue
+                      focus:ring-4 focus:ring-school-blue/10
                       transition-all resize-none" />
                 </div>
 

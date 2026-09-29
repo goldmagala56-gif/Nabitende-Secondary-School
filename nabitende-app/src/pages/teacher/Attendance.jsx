@@ -145,8 +145,8 @@ export default function TeacherAttendance() {
     return (
       <PageShell title="Mark Attendance" subtitle="Select a class and mark each student's status">
         <div className="flex items-center justify-center py-16">
-          <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-            border-t-[#1a6b4a] rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-school-blue/20
+            border-t-school-blue rounded-full animate-spin" />
         </div>
       </PageShell>
     )
@@ -183,7 +183,7 @@ export default function TeacherAttendance() {
               className="appearance-none pl-3.5 pr-9 py-2.5 rounded-xl
                 border-2 border-[var(--color-border)] bg-white
                 text-[11px] text-[var(--color-text)]
-                focus:outline-none focus:border-[#1a6b4a] transition-all">
+                focus:outline-none focus:border-school-blue transition-all">
               {classes.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
             <ChevronDown size={17} className="absolute left-9.5 top-1/2
@@ -202,7 +202,7 @@ export default function TeacherAttendance() {
             className="px-3.5 py-2.5 rounded-xl border-2
               border-[var(--color-border)] bg-white text-[13px]
               text-[var(--color-text)]
-              focus:outline-none focus:border-[#1a6b4a] transition-all" />
+              focus:outline-none focus:border-school-blue transition-all" />
         </div>
 
         <div className="flex flex-col gap-1.5">
@@ -253,7 +253,7 @@ export default function TeacherAttendance() {
           </div>
           <div className="w-full h-2.5 bg-[var(--color-border)]
             rounded-full overflow-hidden mb-3">
-            <div className="h-full bg-[#1a6b4a] rounded-full transition-all"
+            <div className="h-full bg-school-blue rounded-full transition-all"
               style={{ width: `${students.length
                 ? (markedCount / students.length) * 100 : 0}%` }} />
           </div>
@@ -275,8 +275,8 @@ export default function TeacherAttendance() {
       <SectionCard title={`Register — ${selectedClass}`} noPadding>
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-              border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-school-blue/20
+              border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : submitted ? (
           <div className="flex flex-col items-center justify-center
@@ -310,9 +310,9 @@ export default function TeacherAttendance() {
               return (
                 <div key={student.id}
                   className="flex items-center gap-3 px-4 py-3">
-                  <div className="w-7 h-7 rounded-full bg-[#1a6b4a]/10
+                  <div className="w-7 h-7 rounded-full bg-school-blue/10
                     flex items-center justify-center text-[11px]
-                    font-bold text-[#1a6b4a] flex-shrink-0">
+                    font-bold text-school-blue flex-shrink-0">
                     {i + 1}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -360,7 +360,7 @@ export default function TeacherAttendance() {
           <button onClick={handleSubmit}
             disabled={markedCount < students.length || saving}
             className="flex items-center gap-2 px-6 py-3 rounded-xl
-              bg-[#1a6b4a] hover:bg-[#15573c] text-white text-[14px]
+              bg-school-blue hover:bg-school-blue-hover text-white text-[14px]
               font-semibold transition-colors
               disabled:opacity-40 disabled:cursor-not-allowed">
             <Save size={16} />

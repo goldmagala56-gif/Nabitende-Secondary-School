@@ -120,8 +120,8 @@ export default function Notifications({ role }) {
       <SectionCard noPadding>
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <div className="w-6 h-6 border-2 border-[#1a6b4a]/20
-              border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-school-blue/20
+              border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : notifications.length === 0 ? (
           <div className="flex flex-col items-center justify-center

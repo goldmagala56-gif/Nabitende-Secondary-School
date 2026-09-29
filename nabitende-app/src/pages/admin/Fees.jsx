@@ -206,14 +206,14 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
         <div className="flex gap-2">
           <button onClick={() => setStructModal(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl
-              border-2 border-[#1a6b4a] text-[#1a6b4a] text-[13px]
-              font-semibold hover:bg-[#1a6b4a]/5 transition-colors">
+              border-2 border-school-blue text-school-blue text-[13px]
+              font-semibold hover:bg-school-blue/5 transition-colors">
             <Settings size={15} />
             1. Set fee amount
           </button>
           <button onClick={() => setAssignModal(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl
-              bg-[#1a6b4a] hover:bg-[#15573c] text-white
+              bg-school-blue hover:bg-school-blue-hover text-white
               text-[13px] font-semibold transition-colors">
             <Plus size={15} />
             2. Apply to students
@@ -224,10 +224,10 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {[
-          { label: 'Total expected',   value: formatUGX(totalExpected),  color: '#2563eb', icon: TrendingUp   },
-          { label: 'Collected',        value: formatUGX(totalCollected), color: '#1a6b4a', icon: CheckCircle2 },
+          { label: 'Total expected',   value: formatUGX(totalExpected),  color: '#1F9CF0', icon: TrendingUp   },
+          { label: 'Collected',        value: formatUGX(totalCollected), color: '#007ACC', icon: CheckCircle2 },
           { label: 'Outstanding',      value: formatUGX(totalBalance),   color: '#dc2626', icon: AlertCircle  },
-          { label: 'Fully cleared',    value: clearedCount,              color: '#f59e0b', icon: Clock        },
+          { label: 'Fully cleared',    value: clearedCount,              color: '#D9A438', icon: Clock        },
         ].map(s => {
           const Icon = s.icon
           return (
@@ -255,10 +255,10 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
             <span className="text-[13px] text-[var(--color-text-muted)]">
               {formatUGX(totalCollected)} of {formatUGX(totalExpected)}
             </span>
-            <span className="text-[20px] font-bold text-[#1a6b4a]">{collectedPct}%</span>
+            <span className="text-[20px] font-bold text-school-blue">{collectedPct}%</span>
           </div>
           <div className="w-full h-3 bg-[var(--color-bg)] rounded-full overflow-hidden mb-4">
-            <div className="h-full bg-[#1a6b4a] rounded-full transition-all"
+            <div className="h-full bg-school-blue rounded-full transition-all"
               style={{ width: `${collectedPct}%` }} />
           </div>
           <div className="space-y-2">
@@ -281,7 +281,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
         <SectionCard
           title="Collection trend"
           subtitle={momChange !== null ? `MoM change: ${momChange > 0 ? '+' : ''}${momChange}%` : ''}
-          icon={<TrendingUp size={16} className="text-[#1a6b4a]" />}
+          icon={<TrendingUp size={16} className="text-school-blue" />}
         >
           {trendData.length === 0 ? (
             <p className="text-[13px] text-[var(--color-text-muted)]">No data yet.</p>
@@ -299,7 +299,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
                 <Bar dataKey="collected" radius={[4,4,0,0]}>
                   {trendData.map((_, i) => (
                     <Cell key={i}
-                      fill={i === trendData.length - 1 ? '#f59e0b' : '#1a6b4a'} />
+                      fill={i === trendData.length - 1 ? '#D9A438' : '#007ACC'} />
                   ))}
                 </Bar>
               </BarChart>
@@ -338,7 +338,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
                     <td className="px-2 py-2.5 text-[13px] text-[var(--color-text-muted)]">
                       {s.academic_year}
                     </td>
-                    <td className="px-2 py-2.5 text-[13px] font-semibold text-[#1a6b4a]">
+                    <td className="px-2 py-2.5 text-[13px] font-semibold text-school-blue">
                       {formatUGX(s.amount)}
                     </td>
                   </tr>
@@ -356,7 +356,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
             placeholder="Search student or adm. no..."
             className="flex-1 min-w-[160px] px-3 py-1.5 rounded-lg border
               border-[var(--color-border)] bg-white text-[13px]
-              focus:outline-none focus:border-[#1a6b4a]" />
+              focus:outline-none focus:border-school-blue" />
 
           <div className="relative">
             <select value={filterClass} onChange={e => setFilterClass(e.target.value)}
@@ -373,7 +373,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
             <button key={s} onClick={() => setFilterStatus(s)}
               className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border-2
                 transition-colors ${filterStatus === s
-                  ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                  ? 'bg-school-blue text-white border-school-blue'
                   : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
                 }`}>
               {s.charAt(0).toUpperCase() + s.slice(1)}
@@ -383,8 +383,8 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
 
         {loading ? (
           <div className="flex justify-center py-16">
-            <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-              border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-school-blue/20
+              border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : filtered.length === 0 ? (
           <div className="p-10 text-center text-[13px] text-[var(--color-text-muted)]">
@@ -404,7 +404,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
               <tbody className="divide-y divide-[var(--color-border)]">
                 {filtered.map(f => (
                   <tr key={f.id} className="hover:bg-[var(--color-bg)] transition-colors">
-                    <td className="px-4 py-3 text-[13px] font-semibold text-[#1a6b4a]
+                    <td className="px-4 py-3 text-[13px] font-semibold text-school-blue
                       cursor-pointer hover:underline"
                       onClick={() => navigate(`/admin/students/${f.student_id}`)}>
                       {f.full_name}
@@ -430,7 +430,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
                     {f.paid ? formatUGX(f.paid) : '—'}
                   </td>
                   <td className="px-4 py-3 text-[13px] font-semibold"
-                    style={{ color: Number(f.balance) > 0 ? '#dc2626' : '#1a6b4a' }}>
+                    style={{ color: Number(f.balance) > 0 ? '#dc2626' : '#007ACC' }}>
                     {f.balance ? formatUGX(f.balance) : '—'}
                   </td>
                   <td className="px-4 py-3">
@@ -456,7 +456,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
                     <div className="flex items-center gap-2">
                       {f.id && f.status !== 'cleared' && (
                         <button onClick={() => { setPayModal(f); setPayAmount('') }}
-                          className="text-[12px] font-semibold text-[#1a6b4a] hover:underline">
+                          className="text-[12px] font-semibold text-school-blue hover:underline">
                           Pay
                         </button>
                       )}
@@ -527,7 +527,7 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
             <Field label="Class">
               <select value={assignClass}
                 onChange={e => setAssignClass(e.target.value)}
-                required className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all">
+                required className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all">
                 <option value="">Select class...</option>
                 {classes.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
@@ -535,14 +535,14 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
             <Field label="Term">
               <select value={assignTerm}
                 onChange={e => setAssignTerm(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all">
+                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all">
                 {TERMS.map(t => <option key={t} value={t}>{t}</option>)}
               </select>
             </Field>
             <Field label="Academic year">
               <input type="text" value={assignYear}
                 onChange={e => setAssignYear(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
             </Field>
             <ModalActions
               onCancel={() => setAssignModal(false)}
@@ -575,25 +575,25 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
             <input type="text" value={payAccountDetail}
               onChange={e => setPayAccountDetail(e.target.value)}
               placeholder={payMethod === 'Mobile Money' ? 'e.g. 0772-XXX-XXX' : 'e.g. Stanbic - 01-XXXXXXX'}
-              className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+              className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
           </Field>
           <form onSubmit={handleRecordPayment} className="space-y-4">
             <Field label="Amount (UGX)">
               <input type="number" required value={payAmount}
                 onChange={e => setPayAmount(e.target.value)}
-                placeholder="e.g. 250000" className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                placeholder="e.g. 250000" className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
             </Field>
             <Field label="Payment method">
               <select value={payMethod}
                 onChange={e => setPayMethod(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all">  
+                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all">  
                 {METHODS.map(m => <option key={m} value={m}>{m}</option>)}
               </select>
             </Field>
             <Field label="Reference / receipt no. (optional)">
               <input type="text" value={payRef}
                 onChange={e => setPayRef(e.target.value)}
-                placeholder="e.g. MM-TXN-12345" className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                placeholder="e.g. MM-TXN-12345" className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
             </Field>
             <ModalActions
               onCancel={() => setPayModal(null)}
@@ -625,13 +625,13 @@ const momChange = lastTwo.length === 2 && lastTwo[0].collected > 0
             <Field label="Discount amount (UGX)">
               <input type="number" required value={discountAmount}
                 onChange={e => setDiscountAmount(e.target.value)}
-                placeholder="e.g. 100000" className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                placeholder="e.g. 100000" className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
             </Field>
             <Field label="Reason">
               <input type="text" required value={discountReason}
                 onChange={e => setDiscountReason(e.target.value)}
                 placeholder="e.g. Academic merit, Bursary, Staff child"
-                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)] bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
             </Field>
             <ModalActions
               onCancel={() => setDiscountModal(null)}
@@ -686,7 +686,7 @@ function ModalActions({ onCancel, saving, label }) {
         Cancel
       </button>
       <button type="submit" disabled={saving}
-        className="flex-1 py-2.5 rounded-xl bg-[#1a6b4a] hover:bg-[#15573c]
+        className="flex-1 py-2.5 rounded-xl bg-school-blue hover:bg-school-blue-hover
           text-white text-[13px] font-semibold disabled:opacity-60">
         {saving ? 'Saving...' : label}
       </button>

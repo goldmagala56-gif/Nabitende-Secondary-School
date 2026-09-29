@@ -72,10 +72,10 @@ export default function ParentAttendance() {
         <>
           {/* Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            <StatCard label="Days recorded" value={total}   color="#2563eb" />
+            <StatCard label="Days recorded" value={total}   color="#1F9CF0" />
             <StatCard label="Present"       value={present} color="#16a34a" />
             <StatCard label="Absent"        value={absent}  color="#dc2626" />
-            <StatCard label="Late"          value={late}    color="#f59e0b" />
+            <StatCard label="Late"          value={late}    color="#D9A438" />
           </div>
 
           {/* Rate */}
@@ -87,7 +87,7 @@ export default function ParentAttendance() {
               <span className="text-[22px] font-bold"
                 style={{
                   color: pct >= 90 ? '#16a34a' :
-                         pct >= 75 ? '#f59e0b' : '#dc2626'
+                         pct >= 75 ? '#D9A438' : '#dc2626'
                 }}>
                 {pct}%
               </span>
@@ -98,7 +98,7 @@ export default function ParentAttendance() {
                 style={{
                   width: `${pct}%`,
                   background: pct >= 90 ? '#16a34a' :
-                              pct >= 75 ? '#f59e0b' : '#dc2626'
+                              pct >= 75 ? '#D9A438' : '#dc2626'
                 }} />
             </div>
             {pct < 75 && total > 0 && (

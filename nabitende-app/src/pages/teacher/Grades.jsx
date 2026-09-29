@@ -29,7 +29,7 @@ function Dropdown({ label, value, options, onChange }) {
           className="appearance-none pl-3.5 pr-9 py-2.5 rounded-xl
             border-2 border-[var(--color-border)] bg-white
             text-[13px] text-[var(--color-text)] min-w-[180px]
-            focus:outline-none focus:border-[#1a6b4a] transition-all">
+            focus:outline-none focus:border-school-blue transition-all">
           {options.map(o => <option key={o} value={o}>{o}</option>)}
         </select>
         <ChevronDown size={14} className="absolute right-3 top-1/2
@@ -40,7 +40,7 @@ function Dropdown({ label, value, options, onChange }) {
   )
 }
 
-function PillGroup({ label, value, options, onChange, activeColor = '#1a6b4a' }) {
+function PillGroup({ label, value, options, onChange, activeColor = '#007ACC' }) {
   return (
     <div className="flex flex-col gap-1.5">
       <span className="text-[12px] font-semibold text-[var(--color-text-muted)]">
@@ -209,7 +209,7 @@ export default function TeacherGrades() {
       {/* Subject + progress + average tags */}
       <div className="flex items-center gap-3 flex-wrap">
         <span className="text-[12px] font-semibold px-3 py-1.5
-          rounded-full bg-[#1a6b4a]/10 text-[#1a6b4a]">
+          rounded-full bg-school-blue/10 text-school-blue">
           {selectedSubject} · {selectedClass} · {selectedExam}
         </span>
         <span className="text-[12px] text-[var(--color-text-muted)]">
@@ -252,8 +252,8 @@ export default function TeacherGrades() {
         >
           {loading ? (
             <div className="flex items-center justify-center py-16">
-              <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-                border-t-[#1a6b4a] rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-school-blue/20
+                border-t-school-blue rounded-full animate-spin" />
             </div>
           ) : students.length === 0 ? (
             <p className="text-[13px] text-[var(--color-text-muted)] text-center py-10">
@@ -306,7 +306,7 @@ export default function TeacherGrades() {
                           className="w-20 px-3 py-1.5 rounded-lg border-2
                             border-[var(--color-border)] bg-[var(--color-bg)]
                             text-[13px] text-[var(--color-text)]
-                            focus:outline-none focus:border-[#1a6b4a]
+                            focus:outline-none focus:border-school-blue
                             transition-all"
                         />
                       </div>
@@ -340,7 +340,7 @@ export default function TeacherGrades() {
           <button onClick={handleSave}
             disabled={filledCount === 0 || saving}
             className="flex items-center gap-2 px-6 py-3 rounded-xl
-              bg-[#1a6b4a] hover:bg-[#15573c] text-white
+              bg-school-blue hover:bg-school-blue-hover text-white
               text-[14px] font-semibold transition-colors
               disabled:opacity-40 disabled:cursor-not-allowed">
             <Save size={16} />

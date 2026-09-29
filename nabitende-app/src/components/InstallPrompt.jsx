@@ -24,7 +24,7 @@ export default function InstallPrompt() {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80
-      bg-[#1a6b4a] text-white rounded-xl p-4 shadow-lg z-50 flex items-start gap-3">
+      bg-school-blue text-white rounded-xl p-4 shadow-lg z-50 flex items-start gap-3">
       <Download size={20} className="flex-shrink-0 mt-0.5" />
       <div className="flex-1">
         <p className="text-[14px] font-semibold">Install Nabitende SS</p>
@@ -33,7 +33,7 @@ export default function InstallPrompt() {
         </p>
         <button
           onClick={handleInstall}
-          className="mt-2 px-3 py-1.5 bg-white text-[#1a6b4a] text-[13px] font-semibold rounded-lg"
+          className="mt-2 px-3 py-1.5 bg-white text-school-blue text-[13px] font-semibold rounded-lg"
         >
           Install
         </button>

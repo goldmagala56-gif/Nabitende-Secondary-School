@@ -39,7 +39,7 @@ export default function AdminAttendance() {
   }))
 
   const BAR_COLORS = chartData.map(d =>
-    d.pct >= 90 ? '#16a34a' : d.pct >= 75 ? '#f59e0b' : '#dc2626'
+    d.pct >= 90 ? '#16a34a' : d.pct >= 75 ? '#D9A438' : '#dc2626'
   )
 
   const schoolTotal   = classSummary.reduce((a, c) => a + c.total, 0)
@@ -54,7 +54,7 @@ export default function AdminAttendance() {
 
   if (loading) return (
     <div className="flex items-center justify-center py-20">
-      <div className="w-8 h-8 border-2 border-[#1a6b4a]/20 border-t-[#1a6b4a] rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-school-blue/20 border-t-school-blue rounded-full animate-spin" />
     </div>
   )
 
@@ -91,10 +91,10 @@ export default function AdminAttendance() {
           {/* School-wide stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { label: 'School rate',    value: `${schoolPct}%`, color: schoolPct >= 90 ? '#16a34a' : '#f59e0b', icon: CheckCircle2 },
+              { label: 'School rate',    value: `${schoolPct}%`, color: schoolPct >= 90 ? '#16a34a' : '#D9A438', icon: CheckCircle2 },
               { label: 'Total present',  value: schoolPresent,   color: '#16a34a', icon: Users       },
               { label: 'Total absent',   value: schoolAbsent,    color: '#dc2626', icon: AlertCircle },
-              { label: 'Late arrivals',  value: schoolLate,      color: '#f59e0b', icon: TrendingDown },
+              { label: 'Late arrivals',  value: schoolLate,      color: '#D9A438', icon: TrendingDown },
             ].map(s => {
               const Icon = s.icon
               return (
@@ -201,7 +201,7 @@ export default function AdminAttendance() {
                 <tbody className="divide-y divide-[var(--color-border)]">
                   {classSummary.map(c => {
                     const pct = c.total > 0 ? Math.round((c.present / c.total) * 100) : 0
-                    const color = pct >= 90 ? '#16a34a' : pct >= 75 ? '#f59e0b' : '#dc2626'
+                    const color = pct >= 90 ? '#16a34a' : pct >= 75 ? '#D9A438' : '#dc2626'
                     return (
                       <tr key={c.class} className="hover:bg-[var(--color-bg)] transition-colors">
                         <td className="px-5 py-3 text-[13px] font-semibold text-[var(--color-text)]">{c.class}</td>

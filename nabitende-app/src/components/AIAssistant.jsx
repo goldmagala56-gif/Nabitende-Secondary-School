@@ -19,7 +19,7 @@ const ROLE_CONFIG = {
     placeholder: 'Ask about fees, attendance, grades...',
   },
   teacher: {
-    color:       '#1a6b4a',
+    color:       '#007ACC',
     lightBg:     'bg-green-50',
     border:      'border-green-200',
     label:       'Teaching Assistant',
@@ -33,7 +33,7 @@ const ROLE_CONFIG = {
     placeholder: 'Ask about school management, reports, policies...',
   },
   government: {
-    color:       '#1d4ed8',
+    color:       '#0B1B3F',
     lightBg:     'bg-blue-50',
     border:      'border-blue-200',
     label:       'Policy Assistant',
@@ -269,7 +269,7 @@ function cancelMessage() {
               </div>
               {!minimized && (
                 <div className="text-[10px] text-white/70">
-                  Powered by Claude AI · Nabitende-ss
+                  Powered by Claude AI · Nabitende SS
                 </div>
               )}
             </div>

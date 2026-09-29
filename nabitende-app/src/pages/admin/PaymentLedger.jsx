@@ -68,7 +68,7 @@ export default function AdminPaymentLedger() {
             placeholder="Search student or adm. no..."
             className="flex-1 min-w-[160px] px-3 py-1.5 rounded-lg border
               border-[var(--color-border)] bg-white text-[13px]
-              focus:outline-none focus:border-[#1a6b4a]" />
+              focus:outline-none focus:border-school-blue" />
 
           <div className="relative">
             <select value={filterClass} onChange={e => setFilterClass(e.target.value)}
@@ -95,8 +95,8 @@ export default function AdminPaymentLedger() {
 
         {loading ? (
           <div className="flex justify-center py-16">
-            <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-              border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-school-blue/20
+              border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : payments.length === 0 ? (
           <div className="p-10 text-center text-[13px] text-[var(--color-text-muted)]">
@@ -122,7 +122,7 @@ export default function AdminPaymentLedger() {
                         day: 'numeric', month: 'short', year: 'numeric'
                       })}
                     </td>
-                    <td className="px-4 py-3 text-[13px] font-semibold text-[#1a6b4a]
+                    <td className="px-4 py-3 text-[13px] font-semibold text-school-blue
                       cursor-pointer hover:underline"
                       onClick={() => navigate(`/admin/students/${p.student_id}`)}>
                       {p.full_name}
@@ -135,7 +135,7 @@ export default function AdminPaymentLedger() {
                     </td>
                     <td className="px-4 py-3">
                       <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full
-                        bg-[#1a6b4a]/10 text-[#1a6b4a]">
+                        bg-school-blue/10 text-school-blue">
                         {p.method}
                       </span>
                     </td>

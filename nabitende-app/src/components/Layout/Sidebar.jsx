@@ -48,7 +48,7 @@ const navConfig = {
   },
   teacher: {
     label: 'Teacher',
-    color: '#1a6b4a',
+    color: '#007ACC',
     sections: [
       {
         title: 'My Work',
@@ -182,7 +182,7 @@ export default function Sidebar({ role, open, onClose, onLogout }) {
                     flex items-center gap-2.5 px-3 py-2 rounded-md mb-0.5
                     text-[13.5px] transition-colors duration-150
                     ${isActive
-                      ? 'bg-[#1a6b4a]/10 text-[#1a6b4a] font-medium'
+                      ? 'bg-school-blue/10 text-school-blue font-medium'
                       : 'text-[var(--color-text-muted)] hover:bg-[var(--color-bg)] hover:text-[var(--color-text)]'
                     }
                   `}
@@ -193,7 +193,7 @@ export default function Sidebar({ role, open, onClose, onLogout }) {
                     <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${
                       link.badgeAlert
                         ? 'bg-red-50 text-red-600'
-                        : 'bg-[#1a6b4a]/10 text-[#1a6b4a]'
+                        : 'bg-school-blue/10 text-school-blue'
                     }`}>
                       {link.badge}
                     </span>

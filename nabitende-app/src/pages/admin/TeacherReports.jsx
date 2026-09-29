@@ -4,7 +4,7 @@ import api from '../../api'
 
 const REPORT_CATEGORIES = [
   { value: 'general',      label: 'General',      color: '#6b7280' },
-  { value: 'performance',  label: 'Performance',  color: '#2563eb' },
+  { value: 'performance',  label: 'Performance',  color: '#1F9CF0' },
   { value: 'incident',     label: 'Incident',     color: '#dc2626' },
   { value: 'commendation', label: 'Commendation', color: '#16a34a' },
 ]
@@ -392,7 +392,7 @@ export default function AdminTeacherReports() {
                 <div key={s.id} className="px-5 py-4 flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap mb-1.5">
-                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-[#1a6b4a]/10 text-[#1a6b4a]">
+                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-school-blue/10 text-school-blue">
                         {s.report_type}
                       </span>
                       <span className="text-[11px] text-[var(--color-text-muted)]">

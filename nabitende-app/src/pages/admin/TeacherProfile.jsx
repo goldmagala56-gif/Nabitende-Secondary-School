@@ -19,7 +19,7 @@ const SUGGESTED_ROLES = [
 
 const REPORT_CATEGORIES = [
   { value: 'general',      label: 'General',      color: '#6b7280' },
-  { value: 'performance',  label: 'Performance',  color: '#2563eb' },
+  { value: 'performance',  label: 'Performance',  color: '#1F9CF0' },
   { value: 'incident',     label: 'Incident',     color: '#dc2626' },
   { value: 'commendation', label: 'Commendation', color: '#16a34a' },
 ]
@@ -207,8 +207,8 @@ export default function TeacherProfile() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-          border-t-[#1a6b4a] rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-school-blue/20
+          border-t-school-blue rounded-full animate-spin" />
       </div>
     )
   }
@@ -241,9 +241,9 @@ export default function TeacherProfile() {
               <img src={teacher.photo_url} alt={teacher.full_name}
                 className="w-28 h-36 rounded-xl object-cover border border-[var(--color-border)]" />
             ) : (
-              <div className="w-28 h-36 rounded-xl bg-[#1a6b4a]/10
+              <div className="w-28 h-36 rounded-xl bg-school-blue/10
                 flex flex-col items-center justify-center gap-2
-                text-[#1a6b4a]">
+                text-school-blue">
                 <span className="text-[22px] font-bold">
                   {teacher.full_name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                 </span>
@@ -289,7 +289,7 @@ export default function TeacherProfile() {
           <button
             onClick={() => setShowMsgForm(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl
-              bg-[#1a6b4a] hover:bg-[#15573c] text-white
+              bg-school-blue hover:bg-school-blue-hover text-white
               text-[13px] font-semibold transition-colors flex-shrink-0">
             <MessageSquare size={15} />
             Message
@@ -334,7 +334,7 @@ export default function TeacherProfile() {
                 placeholder="Type a role and press Enter..."
                 className="flex-1 px-3.5 py-2.5 rounded-xl border-2
                   border-[var(--color-border)] bg-white text-[14px]
-                  focus:outline-none focus:border-[#1a6b4a] transition-all"
+                  focus:outline-none focus:border-school-blue transition-all"
               />
               <button type="button"
                 onClick={() => {
@@ -344,7 +344,7 @@ export default function TeacherProfile() {
                   }
                   setRoleInput('')
                 }}
-                className="px-4 py-2.5 rounded-xl bg-[#1a6b4a] text-white
+                className="px-4 py-2.5 rounded-xl bg-school-blue text-white
                   text-[13px] font-semibold">
                 Add
               </button>
@@ -358,8 +358,8 @@ export default function TeacherProfile() {
   <div className="flex flex-wrap gap-2 mb-3">
     {['Present', 'On Leave', 'Sick', 'Training', 'Suspended'].map(s => {
       const colors = {
-        Present: '#16a34a', 'On Leave': '#f59e0b',
-        Sick: '#dc2626', Training: '#2563eb', Suspended: '#7c3aed'
+        Present: '#16a34a', 'On Leave': '#D9A438',
+        Sick: '#dc2626', Training: '#1F9CF0', Suspended: '#7c3aed'
       }
       const color = colors[s]
       const active = teacher?.status === s
@@ -422,7 +422,7 @@ export default function TeacherProfile() {
 
             <div className="flex gap-2">
               <button onClick={handleSaveRole} disabled={savingRole}
-                className="px-4 py-2.5 rounded-xl bg-[#1a6b4a] text-white
+                className="px-4 py-2.5 rounded-xl bg-school-blue text-white
                   text-[13px] font-semibold disabled:opacity-60">
                 {savingRole ? 'Saving...' : 'Save'}
               </button>
@@ -472,14 +472,14 @@ export default function TeacherProfile() {
               placeholder="A short bio — background, teaching philosophy, years of experience..."
               className="w-full px-3.5 py-2.5 rounded-xl border-2
                 border-[var(--color-border)] bg-white text-[14px]
-                resize-none focus:outline-none focus:border-[#1a6b4a]" />
+                resize-none focus:outline-none focus:border-school-blue" />
             <div className="flex gap-2 justify-end">
               <button onClick={() => { setEditingBio(false); setBioText(teacher.bio || '') }}
                 className="px-4 py-2 rounded-xl border-2 border-[var(--color-border)] text-[12px] font-semibold text-[var(--color-text)]">
                 Cancel
               </button>
               <button onClick={handleSaveBio} disabled={savingProfile}
-                className="px-4 py-2 rounded-xl bg-[#1a6b4a] text-white text-[12px] font-semibold disabled:opacity-60">
+                className="px-4 py-2 rounded-xl bg-school-blue text-white text-[12px] font-semibold disabled:opacity-60">
                 Save
               </button>
             </div>
@@ -528,7 +528,7 @@ export default function TeacherProfile() {
             className="flex-1 px-3.5 py-2 rounded-xl border-2
               border-[var(--color-border)] bg-white text-[13px] focus:outline-none" />
           <button onClick={handleAddAchievement} disabled={savingProfile}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1a6b4a]
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-school-blue
               text-white text-[12px] font-semibold disabled:opacity-60">
             <Plus size={14} />
             Add
@@ -545,14 +545,14 @@ export default function TeacherProfile() {
               placeholder="Admin notes on this teacher's growth areas, leadership potential, readiness for promotion..."
               className="w-full px-3.5 py-2.5 rounded-xl border-2
                 border-[var(--color-border)] bg-white text-[14px]
-                resize-none focus:outline-none focus:border-[#1a6b4a]" />
+                resize-none focus:outline-none focus:border-school-blue" />
             <div className="flex gap-2 justify-end">
               <button onClick={() => { setEditingPotential(false); setPotentialText(teacher.potential_notes || '') }}
                 className="px-4 py-2 rounded-xl border-2 border-[var(--color-border)] text-[12px] font-semibold text-[var(--color-text)]">
                 Cancel
               </button>
               <button onClick={handleSavePotential} disabled={savingProfile}
-                className="px-4 py-2 rounded-xl bg-[#1a6b4a] text-white text-[12px] font-semibold disabled:opacity-60">
+                className="px-4 py-2 rounded-xl bg-school-blue text-white text-[12px] font-semibold disabled:opacity-60">
                 Save
               </button>
             </div>
@@ -560,7 +560,7 @@ export default function TeacherProfile() {
         ) : (
           <div className="flex items-start justify-between gap-3">
             <p className="flex items-start gap-2 text-[13px] text-[var(--color-text-muted)] leading-relaxed flex-1">
-              <TrendingUp size={14} className="text-[#2563eb] flex-shrink-0 mt-0.5" />
+              <TrendingUp size={14} className="text-school-sky flex-shrink-0 mt-0.5" />
               {teacher.potential_notes || 'No growth notes added yet.'}
             </p>
             <button onClick={() => setEditingPotential(true)}
@@ -581,7 +581,7 @@ export default function TeacherProfile() {
           </p>
           <button onClick={() => setShowReportModal(true)}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl
-              bg-[#1a6b4a] hover:bg-[#15573c] text-white text-[12px] font-semibold
+              bg-school-blue hover:bg-school-blue-hover text-white text-[12px] font-semibold
               flex-shrink-0 transition-colors">
             <FileText size={14} />
             Write report
@@ -590,7 +590,7 @@ export default function TeacherProfile() {
 
         {reportsLoading ? (
           <div className="flex justify-center py-6">
-            <div className="w-6 h-6 border-2 border-[#1a6b4a]/20 border-t-[#1a6b4a] rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-school-blue/20 border-t-school-blue rounded-full animate-spin" />
           </div>
         ) : reports.length === 0 ? (
           <p className="text-[13px] text-[var(--color-text-muted)]">No reports written yet.</p>
@@ -639,7 +639,7 @@ export default function TeacherProfile() {
           <div className="flex flex-wrap gap-2">
             {(teacher.subjects && teacher.subjects.length > 0 ? teacher.subjects : [teacher.subject]).map(s => (
               <span key={s} className="flex items-center gap-1.5 text-[12px] font-semibold
-                px-3 py-1.5 rounded-full bg-[#1a6b4a]/10 text-[#1a6b4a]">
+                px-3 py-1.5 rounded-full bg-school-blue/10 text-school-blue">
                 <BookOpen size={13} /> {s}
               </span>
             ))}
@@ -706,7 +706,7 @@ export default function TeacherProfile() {
                     Cancel
                   </button>
                   <button type="submit" disabled={sending}
-                    className="flex-1 py-2.5 rounded-xl bg-[#1a6b4a] text-white
+                    className="flex-1 py-2.5 rounded-xl bg-school-blue text-white
                       text-[13px] font-semibold disabled:opacity-60">
                     {sending ? 'Sending...' : 'Send message'}
                   </button>
@@ -759,7 +759,7 @@ export default function TeacherProfile() {
                   onChange={e => setReportForm(f => ({ ...f, title: e.target.value }))}
                   placeholder="e.g. Term 2 performance review"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)]
-                    bg-white text-[14px] focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                    bg-white text-[14px] focus:outline-none focus:border-school-blue transition-all" />
               </div>
               <div>
                 <label className="block text-[13px] font-semibold text-[var(--color-text)] mb-1.5">
@@ -769,7 +769,7 @@ export default function TeacherProfile() {
                   onChange={e => setReportForm(f => ({ ...f, body: e.target.value }))}
                   placeholder="Write the details of this report..."
                   className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[var(--color-border)]
-                    bg-white text-[14px] resize-none focus:outline-none focus:border-[#1a6b4a] transition-all" />
+                    bg-white text-[14px] resize-none focus:outline-none focus:border-school-blue transition-all" />
               </div>
               <div className="flex gap-3">
                 <button type="button" onClick={() => setShowReportModal(false)}
@@ -779,7 +779,7 @@ export default function TeacherProfile() {
                 </button>
                 <button type="submit" disabled={savingReport}
                   className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl
-                    bg-[#1a6b4a] hover:bg-[#15573c] text-white text-[13px] font-semibold
+                    bg-school-blue hover:bg-school-blue-hover text-white text-[13px] font-semibold
                     disabled:opacity-60">
                   <Send size={14} />
                   {savingReport ? 'Saving...' : 'Save report'}
@@ -867,7 +867,7 @@ function PhotoUpload({ teacherId, onSaved, onCancel }) {
           <button type="button"
             onClick={handleUpload}
             disabled={uploading}
-            className="px-4 py-2 rounded-xl bg-[#1a6b4a] text-white
+            className="px-4 py-2 rounded-xl bg-school-blue text-white
               text-[13px] font-semibold disabled:opacity-60 transition-colors">
             {uploading ? 'Saving...' : 'Save photo'}
           </button>

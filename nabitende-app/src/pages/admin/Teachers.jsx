@@ -173,7 +173,7 @@ async function handleEditTeacher(e) {
       actions={
         <button onClick={() => setShowForm(s => !s)}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl
-            bg-[#1a6b4a] hover:bg-[#15573c] text-white
+            bg-school-blue hover:bg-school-blue-hover text-white
             text-[13px] font-semibold transition-colors">
           <Plus size={16} />
           Add teacher
@@ -183,9 +183,9 @@ async function handleEditTeacher(e) {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <StatCard label="Total staff"   value={activeCount} color="#1a6b4a" icon={GraduationCap} sub="active teachers"   />
-        <StatCard label="Subjects"      value={subjects}    color="#2563eb" icon={BookOpen}      sub="being taught"      />
-        <StatCard label="Classes"       value={classes.length} color="#f59e0b" icon={GraduationCap} sub="streams covered" />
+        <StatCard label="Total staff"   value={activeCount} color="#007ACC" icon={GraduationCap} sub="active teachers"   />
+        <StatCard label="Subjects"      value={subjects}    color="#1F9CF0" icon={BookOpen}      sub="being taught"      />
+        <StatCard label="Classes"       value={classes.length} color="#D9A438" icon={GraduationCap} sub="streams covered" />
       </div>
 
       {/* Add teacher form */}
@@ -203,8 +203,8 @@ async function handleEditTeacher(e) {
                   placeholder="e.g. Mr. Kato James"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
               <div>
@@ -216,8 +216,8 @@ async function handleEditTeacher(e) {
                   placeholder="e.g. kato@stmarys.ac.ug"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
               <div>
@@ -229,8 +229,8 @@ async function handleEditTeacher(e) {
                   placeholder="e.g. 0772-123-456"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
               <div>
@@ -250,7 +250,7 @@ async function handleEditTeacher(e) {
                           className={`px-3 py-1.5 rounded-full text-[12px]
                             font-semibold border-2 transition-all ${
                             form.subjects.includes(subj)
-                              ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                              ? 'bg-school-blue text-white border-school-blue'
                               : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
                             }`}>
                           {subj}
@@ -270,8 +270,8 @@ async function handleEditTeacher(e) {
                   placeholder="e.g. B.Ed - Makerere University"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
               <div>
@@ -285,8 +285,8 @@ async function handleEditTeacher(e) {
                   placeholder="Set a password for this teacher"
                   className="w-full px-3.5 py-2.5 rounded-xl border-2
                     border-[var(--color-border)] bg-white text-[14px]
-                    focus:outline-none focus:border-[#1a6b4a]
-                    focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                    focus:outline-none focus:border-school-blue
+                    focus:ring-4 focus:ring-school-blue/10 transition-all" />
               </div>
 
             </div>
@@ -311,7 +311,7 @@ async function handleEditTeacher(e) {
                       className={`px-3 py-1.5 rounded-full text-[12px]
                         font-semibold border-2 transition-all ${
                         form.classes.includes(cls)
-                          ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                          ? 'bg-school-blue text-white border-school-blue'
                           : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
                         }`}>
                       {cls}
@@ -330,8 +330,8 @@ async function handleEditTeacher(e) {
                 Cancel
               </button>
               <button type="submit" disabled={saving}
-                className="px-5 py-2.5 rounded-xl bg-[#1a6b4a]
-                  hover:bg-[#15573c] text-white text-[13px]
+                className="px-5 py-2.5 rounded-xl bg-school-blue
+                  hover:bg-school-blue-hover text-white text-[13px]
                   font-semibold transition-colors
                   disabled:opacity-60 disabled:cursor-not-allowed">
                 {saving ? 'Adding...' : 'Add teacher'}
@@ -344,8 +344,8 @@ async function handleEditTeacher(e) {
       {/* Teachers list */}
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-            border-t-[#1a6b4a] rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-school-blue/20
+            border-t-school-blue rounded-full animate-spin" />
         </div>
       ) : (
         <div className="space-y-3">
@@ -365,9 +365,9 @@ async function handleEditTeacher(e) {
                 <div className="flex items-start gap-4">
 
                   {/* Avatar */}
-                  <div className="w-12 h-12 rounded-xl bg-[#1a6b4a]/10
+                  <div className="w-12 h-12 rounded-xl bg-school-blue/10
                     flex items-center justify-center text-[15px]
-                    font-bold text-[#1a6b4a] flex-shrink-0">
+                    font-bold text-school-blue flex-shrink-0">
                     {teacher.full_name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                   </div>
 
@@ -382,7 +382,7 @@ async function handleEditTeacher(e) {
                       <div className="flex gap-1.5 flex-wrap">
                         {(teacher.subjects || [teacher.subject]).map(s => (
                           <span key={s} className="text-[11px] font-semibold px-2.5 py-1 rounded-full
-                            bg-[#1a6b4a]/10 text-[#1a6b4a]">
+                            bg-school-blue/10 text-school-blue">
                             {s}
                           </span>
                         ))}
@@ -431,9 +431,9 @@ async function handleEditTeacher(e) {
                       <button
                         onClick={() => navigate(`/admin/teachers/${teacher.id}`)}
                         className="flex items-center gap-1.5 px-3 py-1.5
-                          rounded-lg border-2 border-[#1a6b4a]/30
-                          text-[#1a6b4a] text-[12px] font-semibold
-                          hover:bg-[#1a6b4a]/10 transition-colors">
+                          rounded-lg border-2 border-school-blue/30
+                          text-school-blue text-[12px] font-semibold
+                          hover:bg-school-blue/10 transition-colors">
                         <GraduationCap size={13} />
                         View profile
                       </button>
@@ -460,8 +460,8 @@ async function handleEditTeacher(e) {
                           setMsgSuccess(false)
                         }}
                         className="flex items-center gap-1.5 px-3 py-1.5
-                          rounded-lg border-2 border-[#2563eb]/30
-                          text-[#2563eb] text-[12px] font-semibold
+                          rounded-lg border-2 border-school-sky/30
+                          text-school-sky text-[12px] font-semibold
                           hover:bg-blue-50 transition-colors">
                         <MessageSquare size={13} />
                         Send message
@@ -510,7 +510,7 @@ async function handleEditTeacher(e) {
             placeholder="e.g. 0772-123-456"
             className="w-full px-3.5 py-2.5 rounded-xl border-2
               border-[var(--color-border)] bg-white text-[14px]
-              focus:outline-none focus:border-[#1a6b4a] transition-all" />
+              focus:outline-none focus:border-school-blue transition-all" />
         </div>
 
         <div>
@@ -523,7 +523,7 @@ async function handleEditTeacher(e) {
             placeholder="e.g. B.Ed - Makerere University"
             className="w-full px-3.5 py-2.5 rounded-xl border-2
               border-[var(--color-border)] bg-white text-[14px]
-              focus:outline-none focus:border-[#1a6b4a] transition-all" />
+              focus:outline-none focus:border-school-blue transition-all" />
         </div>
 
         <div>
@@ -541,7 +541,7 @@ async function handleEditTeacher(e) {
                 }))}
                 className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border-2 transition-all ${
                   editForm.subjects.includes(subj)
-                    ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                    ? 'bg-school-blue text-white border-school-blue'
                     : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
                 }`}>
                 {subj}
@@ -565,7 +565,7 @@ async function handleEditTeacher(e) {
                 }))}
                 className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border-2 transition-all ${
                   editForm.classes.includes(cls)
-                    ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                    ? 'bg-school-blue text-white border-school-blue'
                     : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
                 }`}>
                 {cls}
@@ -583,8 +583,8 @@ async function handleEditTeacher(e) {
             Cancel
           </button>
           <button type="submit" disabled={updating}
-            className="flex-1 py-2.5 rounded-xl bg-[#1a6b4a]
-              hover:bg-[#15573c] text-white text-[13px] font-semibold
+            className="flex-1 py-2.5 rounded-xl bg-school-blue
+              hover:bg-school-blue-hover text-white text-[13px] font-semibold
               transition-colors disabled:opacity-60">
             {updating ? 'Saving...' : 'Save changes'}
           </button>
@@ -641,8 +641,8 @@ async function handleEditTeacher(e) {
                     placeholder="e.g. S.4 marks submission"
                     className="w-full px-3.5 py-2.5 rounded-xl border-2
                       border-[var(--color-border)] bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
-                      focus:ring-4 focus:ring-[#1a6b4a]/10 transition-all" />
+                      focus:outline-none focus:border-school-blue
+                      focus:ring-4 focus:ring-school-blue/10 transition-all" />
                 </div>
                 <div>
                   <label className="block text-[13px] font-semibold
@@ -653,8 +653,8 @@ async function handleEditTeacher(e) {
                     placeholder="Type your message here..."
                     className="w-full px-3.5 py-2.5 rounded-xl border-2
                       border-[var(--color-border)] bg-white text-[14px]
-                      focus:outline-none focus:border-[#1a6b4a]
-                      focus:ring-4 focus:ring-[#1a6b4a]/10
+                      focus:outline-none focus:border-school-blue
+                      focus:ring-4 focus:ring-school-blue/10
                       transition-all resize-none" />
                 </div>
                 <div className="flex gap-3">
@@ -667,8 +667,8 @@ async function handleEditTeacher(e) {
                     Cancel
                   </button>
                   <button type="submit" disabled={sendingMsg}
-                    className="flex-1 py-2.5 rounded-xl bg-[#1a6b4a]
-                      hover:bg-[#15573c] text-white text-[13px]
+                    className="flex-1 py-2.5 rounded-xl bg-school-blue
+                      hover:bg-school-blue-hover text-white text-[13px]
                       font-semibold transition-colors
                       disabled:opacity-60">
                     {sendingMsg ? 'Sending...' : 'Send message'}

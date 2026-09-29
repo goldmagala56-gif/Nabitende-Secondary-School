@@ -107,13 +107,13 @@ export default function StudentGrades() {
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-3">
-            <StatCard label="Subjects"     value={rows.length}   color="#2563eb" />
-            <StatCard label="Total points" value={totalPoints}   color="#1a6b4a" />
+            <StatCard label="Subjects"     value={rows.length}   color="#1F9CF0" />
+            <StatCard label="Total points" value={totalPoints}   color="#007ACC" />
             <StatCard label="Best subject" value={
               rows.length > 0
                 ? rows.reduce((a, b) => (a.average || 0) > (b.average || 0) ? a : b).subject.split(' ')[0]
                 : '—'
-            } color="#f59e0b" />
+            } color="#D9A438" />
           </div>
 
           {/* Report card */}

@@ -3,9 +3,9 @@
 
 /* ─── Design tokens ─────────────────────────────────────────────── */
 :root {
-  --color-primary:    #1a6b4a;
-  --color-secondary:  #2563eb;
-  --color-accent:     #f59e0b;
+  --color-primary:    #007ACC;
+  --color-secondary:  #1F9CF0;
+  --color-accent:     #D9A438;
   --color-danger:     #dc2626;
   --color-success:    #16a34a;
   --color-bg:         #f8fafc;
@@ -44,9 +44,9 @@ body {
 /* ─── Role colors ────────────────────────────────────────────────── */
 .role-student    { --role-color: #7c3aed; }
 .role-parent     { --role-color: #0891b2; }
-.role-teacher    { --role-color: #1a6b4a; }
+.role-teacher    { --role-color: #007ACC; }
 .role-admin      { --role-color: #ea580c; }
-.role-government { --role-color: #1d4ed8; }
+.role-government { --role-color: #0B1B3F; }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -65,7 +65,7 @@ h1, h2, h3, h4 {
 
 /* ─── Touch targets ──────────────────────────────────────────────── */
 button, a, [role="button"], input, select, textarea {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
   padding: 10px;
 }
 
@@ -131,7 +131,7 @@ input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(26, 107, 74, 0.12);
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.12);
 }
 
 /* ─── Recharts tooltip ───────────────────────────────────────────── */

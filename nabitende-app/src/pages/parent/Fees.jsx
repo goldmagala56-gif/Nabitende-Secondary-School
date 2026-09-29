@@ -96,7 +96,7 @@ export default function ParentFees() {
             ))}
             <div className="flex items-center justify-between pt-2">
               <span className="text-[14px] font-bold text-[var(--color-text)]">Total</span>
-              <span className="text-[14px] font-bold text-[#1a6b4a]">
+              <span className="text-[14px] font-bold text-school-blue">
                 {formatUGX(termFeeTotal)}
               </span>
             </div>

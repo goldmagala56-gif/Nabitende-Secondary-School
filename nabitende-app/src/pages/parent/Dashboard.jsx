@@ -298,7 +298,7 @@ export default function ParentDashboard() {
           <div className="space-y-2">
             {recentGrades.map((g) => {
               const letter = gradeLetter(g.score)
-              const gradeColor = letter === 'A' ? '#16a34a' : letter === 'B' ? '#2563eb' : '#f59e0b'
+              const gradeColor = letter === 'A' ? '#16a34a' : letter === 'B' ? '#1F9CF0' : '#D9A438'
               return (
                 <div key={g.subject}
                   className="flex items-center gap-3 p-3 rounded-lg border border-[var(--color-border)]">

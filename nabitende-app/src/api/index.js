@@ -9,7 +9,7 @@ const api = axios.create({
 
 // Automatically attach token to every request
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('Nabitende-ss_token')
+  const token = localStorage.getItem('Nabitende SS_token')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -21,8 +21,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401){
-      localStorage.removeItem('Nabitende-ss_token')
-      localStorage.removeItem('Nabitende-ss_user')
+      localStorage.removeItem('Nabitende SS_token')
+      localStorage.removeItem('Nabitende SS_user')
       window.location.href = '/login'
     }
     return Promise.reject(error)

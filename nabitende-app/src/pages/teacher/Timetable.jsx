@@ -46,8 +46,8 @@ export default function TeacherTimetable() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-16">
-        <div className="w-8 h-8 border-2 border-[#1a6b4a]/20
-          border-t-[#1a6b4a] rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-school-blue/20
+          border-t-school-blue rounded-full animate-spin" />
       </div>
     )
   }
@@ -65,8 +65,8 @@ export default function TeacherTimetable() {
           </p>
         </div>
         <div className="flex items-center gap-2 px-4 py-2 rounded-lg
-          bg-[#1a6b4a]/10 border border-[#1a6b4a]/20">
-          <span className="text-[13px] font-semibold text-[#1a6b4a]">
+          bg-school-blue/10 border border-school-blue/20">
+          <span className="text-[13px] font-semibold text-school-blue">
             {totalWeeklyPeriods} periods/week
           </span>
         </div>
@@ -91,7 +91,7 @@ export default function TeacherTimetable() {
                   onClick={() => setSelectedDay(day)}
                   className={`p-3 rounded-xl border text-center transition-colors ${
                     selectedDay === day
-                      ? 'bg-[#1a6b4a] text-white border-[#1a6b4a]'
+                      ? 'bg-school-blue text-white border-school-blue'
                       : 'bg-[var(--color-surface)] border-[var(--color-border)] hover:bg-[var(--color-bg)]'
                   }`}>
                   <div className={`text-[11px] font-medium ${

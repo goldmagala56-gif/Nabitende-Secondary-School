@@ -213,7 +213,7 @@ async function addSubject(val) {
 
   if (loading) return (
     <div className="flex items-center justify-center py-20">
-      <div className="w-8 h-8 border-2 border-[#1a6b4a]/20 border-t-[#1a6b4a] rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-school-blue/20 border-t-school-blue rounded-full animate-spin" />
     </div>
   )
 
@@ -330,21 +330,21 @@ async function addSubject(val) {
           label="Attendance"
           value={attendancePct !== null ? `${attendancePct}%` : '—'}
           sub={`${presentCount}/${totalDays} days`}
-          color={attendancePct >= 75 ? '#1a6b4a' : '#dc2626'}
+          color={attendancePct >= 75 ? '#007ACC' : '#dc2626'}
         />
         <QuickStat
           icon={<DollarSign size={16} />}
           label="Fee status"
           value={latestFee?.status ? latestFee.status.toUpperCase() : '—'}
           sub={latestFee ? `Balance: UGX ${Number(latestFee.balance).toLocaleString()}` : 'No record'}
-          color={latestFee?.status === 'cleared' ? '#1a6b4a' : '#f59e0b'}
+          color={latestFee?.status === 'cleared' ? '#007ACC' : '#D9A438'}
         />
         <QuickStat
           icon={<Star size={16} />}
           label="Achievements"
           value={(student.achievements || []).length}
           sub="recorded"
-          color="#f59e0b"
+          color="#D9A438"
         />
       </div>
 
@@ -358,7 +358,7 @@ async function addSubject(val) {
             <div className="flex items-center gap-3 mb-4">
               <div className="flex-1 h-3 rounded-full bg-[var(--color-bg)] overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-[#1a6b4a] transition-all"
+                  className="h-full rounded-full bg-school-blue transition-all"
                   style={{ width: `${attendancePct}%` }}
                 />
               </div>
@@ -486,7 +486,7 @@ async function addSubject(val) {
                           className="h-full rounded-full transition-all"
                           style={{
                             width: `${avg}%`,
-                            background: avg >= 60 ? '#1a6b4a' : avg >= 45 ? '#f59e0b' : '#dc2626'
+                            background: avg >= 60 ? '#007ACC' : avg >= 45 ? '#D9A438' : '#dc2626'
                           }}
                         />
                       </div>
@@ -1005,7 +1005,7 @@ function FeeSection({ studentId, studentName }) {
                     setPayForm({ amount: '', method: 'Cash', reference: '', notes: '' })
                   }}
                     className="flex items-center gap-1 px-3 py-1.5 rounded-lg
-                      bg-[#1a6b4a] text-white text-[12px] font-semibold">
+                      bg-school-blue text-white text-[12px] font-semibold">
                     <Plus size={12} /> Record payment
                   </button>
                 )}
@@ -1156,7 +1156,7 @@ function FeeSection({ studentId, studentName }) {
                   Cancel
                 </button>
                 <button type="submit" disabled={saving}
-                  className="flex-1 py-2.5 rounded-xl bg-[#1a6b4a] text-white
+                  className="flex-1 py-2.5 rounded-xl bg-school-blue text-white
                     text-[13px] font-semibold disabled:opacity-60">
                   {saving ? 'Saving...' : 'Save payment'}
                 </button>

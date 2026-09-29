@@ -1,4 +1,4 @@
-export default function StatCard({ label, value, sub, color = '#1a6b4a', icon: Icon, trend }) {
+export default function StatCard({ label, value, sub, color = '#007ACC', icon: Icon, trend }) {
   return (
     <div
       className="bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] p-4"
