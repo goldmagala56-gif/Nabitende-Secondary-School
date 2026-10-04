@@ -68,7 +68,7 @@ export default function Login() {
         {/* Middle: headline */}
         <div className="flex-1 flex flex-col justify-center px-8 py-10
           border-b-[3px] border-white/15">
-          <h1 className="text-[22px] font-bold leading-snug mb-4">
+          <h1 className="text-[22px] font-bold mb-4" style={{ lineHeight: 1.35 }}>
             Connecting schools,<br />parents &amp;<br />government.
           </h1>
           <p className="text-white/70 text-[14px] leading-relaxed">
@@ -91,7 +91,7 @@ export default function Login() {
                 onClick={() => fillHint(h.email)}
                 className="w-full flex items-center gap-3 px-3 py-3
                   rounded-xl transition-all text-left
-                  border-[3px] border-white/10
+                  border-[4px] border-white/30
                   hover:bg-white/15 active:bg-white/20"
                 style={{
                   background: email === h.email
