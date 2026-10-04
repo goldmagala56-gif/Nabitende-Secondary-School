@@ -8,7 +8,7 @@ const ROLE_HINTS = [
   { role: 'Teacher',     email: 'teacher@nabitendess.ug', color: '#007ACC', bg: '#f0fdf4' },
   { role: 'Parent',      email: 'parent@nabitendess.ug',  color: '#0891b2', bg: '#ecfeff' },
   { role: 'Student',     email: 'student@nabitendess.ug', color: '#7c3aed', bg: '#faf5ff' },
-  { role: 'Board of Governors',  email: 'gov@nabitendess.ug',     color: '#0B1B3F', bg: '#eff6ff' },
+  { role: 'Board of Governors',  email: 'gov@nabitendess.ug',    color: '#0B1B3F', bg: '#eff6ff' },
 ]
 
 const PASSWORD_MAP = {
@@ -29,14 +29,14 @@ export default function Login() {
   const [loading,  setLoading]  = useState(false)
 
   async function handleSubmit(e) {
-  e.preventDefault()
-  setError('')
-  setLoading(true)
-  const result = await login(email, password)
-  setLoading(false)
-  if (!result.ok) { setError(result.error); return }
-  navigate(result.home, { replace: true })
- }
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+    const result = await login(email, password)
+    setLoading(false)
+    if (!result.ok) { setError(result.error); return }
+    navigate(result.home, { replace: true })
+  }
 
   function fillHint(emailVal) {
     setEmail(emailVal)
@@ -49,10 +49,11 @@ export default function Login() {
 
       {/* ── Left branding panel ── */}
       <div className="hidden lg:flex flex-col w-[400px] min-w-[400px]
-        bg-school-blue text-white">
+        bg-school-blue text-white
+        border-r-[3px] border-double border-white/25">
 
         {/* Top: logo */}
-        <div className="px-8 pt-10 pb-0">
+        <div className="px-8 pt-10 pb-6 border-b border-white/15">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white/20
               flex items-center justify-center flex-shrink-0">
@@ -65,19 +66,20 @@ export default function Login() {
         </div>
 
         {/* Middle: headline */}
-        <div className="flex-1 flex flex-col justify-center px-8 py-12">
-          <h1 className="text-[32px] font-bold leading-tight mb-5">
+        <div className="flex-1 flex flex-col justify-center px-8 py-10
+          border-b border-white/15">
+          <h1 className="text-[30px] font-bold leading-tight mb-4">
             Connecting schools,<br />parents &amp;<br />government.
           </h1>
-          <p className="text-white/70 text-[15px] leading-relaxed">
+          <p className="text-white/70 text-[14px] leading-relaxed">
             One platform for students, teachers, parents,
-            school heads and government officials to
+            school heads and the board of governors to
             work together efficiently.
           </p>
         </div>
 
         {/* Bottom: role hints */}
-        <div className="px-6 pb-8">
+        <div className="px-6 py-6">
           <p className="text-[10px] font-semibold text-white/40
             uppercase tracking-widest mb-3 px-2">
             Quick sign in as
@@ -89,6 +91,7 @@ export default function Login() {
                 onClick={() => fillHint(h.email)}
                 className="w-full flex items-center gap-3 px-3 py-3
                   rounded-xl transition-all text-left
+                  border border-white/10
                   hover:bg-white/15 active:bg-white/20"
                 style={{
                   background: email === h.email
@@ -119,9 +122,9 @@ export default function Login() {
 
       {/* ── Right form panel ── */}
       <div className="flex-1 flex items-center justify-center
-        px-6 py-16 lg:py-0">
+        px-6 py-16 lg:py-10">
 
-        <div className="w-full max-w-[420px]">
+        <div className="w-full max-w-[440px]">
 
           {/* Mobile logo */}
           <div className="flex items-center gap-3 mb-10 lg:hidden">
@@ -134,19 +137,21 @@ export default function Login() {
             </span>
           </div>
 
-          {/* Heading */}
-          <div className="mb-8">
-            <h2 className="text-[32px] font-bold text-[var(--color-text)]
-              leading-tight mb-2">
+          {/* Heading panel */}
+          <div className="border border-[var(--color-border)] rounded-t-2xl
+            bg-white px-7 pt-7 pb-6">
+            <h2 className="text-[28px] font-bold text-[var(--color-text)]
+              leading-tight mb-1.5">
               Welcome back
             </h2>
-            <p className="text-[15px] text-[var(--color-text-muted)]">
+            <p className="text-[14px] text-[var(--color-text-muted)]">
               Sign in to your Nabitende SS account
             </p>
           </div>
 
           {/* Mobile role pills */}
-          <div className="lg:hidden grid grid-cols-3 gap-2 mb-8">
+          <div className="lg:hidden grid grid-cols-3 gap-2
+            border-x border-[var(--color-border)] bg-white px-7 py-5">
             {ROLE_HINTS.map((h) => (
               <button
                 key={h.role}
@@ -164,9 +169,10 @@ export default function Login() {
             ))}
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-
+          {/* Form panel */}
+          <form onSubmit={handleSubmit} className="space-y-6
+            border border-[var(--color-border)] rounded-b-2xl
+            bg-white px-7 pt-7 pb-8 shadow-sm">
             {/* Email field */}
             <div>
               <label className="block text-[14px] font-semibold
@@ -253,7 +259,8 @@ export default function Login() {
           </form>
 
           {/* Footer note */}
-          <p className="mt-10 text-center text-[13px] text-[var(--color-text-muted)]">
+          <p className="mt-6 text-center text-[13px] text-[var(--color-text-muted)]
+            border-t border-[var(--color-border)] pt-5">
             Nabitende SS · Uganda · Term 2, 2026
           </p>
         </div>
