@@ -4,19 +4,19 @@ import { useAuth } from '../../context/AuthContext'
 import { School, Eye, EyeOff, LogIn } from 'lucide-react'
 
 const ROLE_HINTS = [
-  { role: 'School Head', email: 'admin@Nabitende SS.ug',   color: '#ea580c', bg: '#fff7ed' },
-  { role: 'Teacher',     email: 'teacher@Nabitende SS.ug', color: '#007ACC', bg: '#f0fdf4' },
-  { role: 'Parent',      email: 'parent@Nabitende SS.ug',  color: '#0891b2', bg: '#ecfeff' },
-  { role: 'Student',     email: 'student@Nabitende SS.ug', color: '#7c3aed', bg: '#faf5ff' },
-  { role: 'Government',  email: 'gov@Nabitende SS.ug',     color: '#0B1B3F', bg: '#eff6ff' },
+  { role: 'School Head', email: 'admin@nabitendess.ug',   color: '#ea580c', bg: '#fff7ed' },
+  { role: 'Teacher',     email: 'teacher@nabitendess.ug', color: '#007ACC', bg: '#f0fdf4' },
+  { role: 'Parent',      email: 'parent@nabitendess.ug',  color: '#0891b2', bg: '#ecfeff' },
+  { role: 'Student',     email: 'student@nabitendess.ug', color: '#7c3aed', bg: '#faf5ff' },
+  { role: 'Board of Governors',  email: 'gov@nabitendess.ug',     color: '#0B1B3F', bg: '#eff6ff' },
 ]
 
 const PASSWORD_MAP = {
-  'admin@Nabitende SS.ug':   'admin123',
-  'teacher@Nabitende SS.ug': 'teacher123',
-  'parent@Nabitende SS.ug':  'parent123',
-  'student@Nabitende SS.ug': 'student123',
-  'gov@Nabitende SS.ug':     'gov123',
+  'admin@nabitendess.ug':   'admin123',
+  'teacher@nabitendess.ug': 'teacher123',
+  'parent@nabitendess.ug':  'parent123',
+  'student@nabitendess.ug': 'student123',
+  'gov@nabitendess.ug':     'gov123',
 }
 
 export default function Login() {
@@ -177,7 +177,7 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="you@Nabitende SS.ug"
+                placeholder="you@nabitendess.ug"
                 required
                 className="w-full px-4 py-3.5 rounded-xl
                   border-2 border-[var(--color-border)]
