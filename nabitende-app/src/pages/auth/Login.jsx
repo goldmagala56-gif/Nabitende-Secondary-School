@@ -53,7 +53,7 @@ export default function Login() {
         border-r-[3px] border-double border-white/25">
 
         {/* Top: logo */}
-        <div className="px-8 pt-10 pb-6 border-b border-white/15">
+        <div className="px-8 pt-10 pb-6 border-b-[3px] border-white/15">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white/20
               flex items-center justify-center flex-shrink-0">
@@ -67,8 +67,8 @@ export default function Login() {
 
         {/* Middle: headline */}
         <div className="flex-1 flex flex-col justify-center px-8 py-10
-          border-b border-white/15">
-          <h1 className="text-[30px] font-bold leading-tight mb-4">
+          border-b-[3px] border-white/15">
+          <h1 className="text-[22px] font-bold leading-snug mb-4">
             Connecting schools,<br />parents &amp;<br />government.
           </h1>
           <p className="text-white/70 text-[14px] leading-relaxed">
@@ -91,7 +91,7 @@ export default function Login() {
                 onClick={() => fillHint(h.email)}
                 className="w-full flex items-center gap-3 px-3 py-3
                   rounded-xl transition-all text-left
-                  border border-white/10
+                  border-[3px] border-white/10
                   hover:bg-white/15 active:bg-white/20"
                 style={{
                   background: email === h.email
@@ -138,7 +138,7 @@ export default function Login() {
           </div>
 
           {/* Heading panel */}
-          <div className="border border-[var(--color-border)] rounded-t-2xl
+          <div className="border-[3px] border-[var(--color-border)] rounded-t-2xl
             bg-white px-7 pt-7 pb-6">
             <h2 className="text-[28px] font-bold text-[var(--color-text)]
               leading-tight mb-1.5">
@@ -151,7 +151,7 @@ export default function Login() {
 
           {/* Mobile role pills */}
           <div className="lg:hidden grid grid-cols-3 gap-2
-            border-x border-[var(--color-border)] bg-white px-7 py-5">
+            border-x-[3px] border-[var(--color-border)] bg-white px-7 py-5">
             {ROLE_HINTS.map((h) => (
               <button
                 key={h.role}
@@ -171,7 +171,7 @@ export default function Login() {
 
           {/* Form panel */}
           <form onSubmit={handleSubmit} className="space-y-6
-            border border-[var(--color-border)] rounded-b-2xl
+            border-[3px] border-[var(--color-border)] rounded-b-2xl
             bg-white px-7 pt-7 pb-8 shadow-sm">
             {/* Email field */}
             <div>
@@ -260,7 +260,7 @@ export default function Login() {
 
           {/* Footer note */}
           <p className="mt-6 text-center text-[13px] text-[var(--color-text-muted)]
-            border-t border-[var(--color-border)] pt-5">
+            border-t-[3px] border-[var(--color-border)] pt-5">
             Nabitende SS · Uganda · Term 2, 2026
           </p>
         </div>
